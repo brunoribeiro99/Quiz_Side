@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PixelU - Teste de Avatares</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>PixelU 🎮</h1>
+
+    <p class="subtitulo">
+        Teste dos personagens
+    </p>
+
+
+    <!-- ESCOLHA DO GÊNERO -->
+
+    <div class="generos">
+
+       <button class="genero-btn ativo" onclick="mostrarAvatares('Masculino', this)">
+Masculino
+</button>
+
+<button class="genero-btn" onclick="mostrarAvatares('Feminino', this)">
+Feminino
+</button>
+    </div>
+
+
+    <!-- PERGUNTA 1 -->
+
+    <section class="pergunta">
+
+        <h2>1. O que você mais gostaria de fazer?</h2>
+
+        <label>
+            <input type="radio" name="q1" value="programacao">
+            Criar sites, sistemas ou jogos
+        </label>
+
+        <label>
+            <input type="radio" name="q1" value="designer">
+            Criar a aparência de aplicativos e sites
+        </label>
+
+        <label>
+            <input type="radio" name="q1" value="redes">
+            Montar e cuidar de redes de computadores
+        </label>
+
+        <label>
+            <input type="radio" name="q1" value="ciberseguranca">
+            Proteger sistemas contra ataques
+        </label>
+
+    </section>
+
+
+    <!-- PERGUNTA 2 -->
+
+    <section class="pergunta">
+
+        <h2>2. Qual dessas atividades parece mais interessante?</h2>
+
+        <label>
+            <input type="radio" name="q2" value="programacao">
+            Resolver problemas usando código
+        </label>
+
+        <label>
+            <input type="radio" name="q2" value="designer">
+            Escolher cores, formas e criar interfaces
+        </label>
+
+        <label>
+            <input type="radio" name="q2" value="redes">
+            Fazer computadores e dispositivos se comunicarem
+        </label>
+
+        <label>
+            <input type="radio" name="q2" value="ciberseguranca">
+            Descobrir e evitar falhas de segurança
+        </label>
+
+    </section>
+
+
+    <!-- PERGUNTA 3 -->
+
+    <section class="pergunta">
+
+        <h2>3. Qual dessas características combina mais com você?</h2>
+
+        <label>
+            <input type="radio" name="q3" value="programacao">
+            Gosto de criar e resolver problemas
+        </label>
+
+        <label>
+            <input type="radio" name="q3" value="designer">
+            Sou criativo e gosto de deixar as coisas bonitas
+        </label>
+
+        <label>
+            <input type="radio" name="q3" value="redes">
+            Gosto de entender como as coisas estão conectadas
+        </label>
+
+        <label>
+            <input type="radio" name="q3" value="ciberseguranca">
+            Gosto de investigar e encontrar problemas
+        </label>
+
+    </section>
+
+
+    <!-- PERGUNTA 4 -->
+
+    <section class="pergunta">
+
+        <h2>4. Se você tivesse um computador com problema, o que faria?</h2>
+
+        <label>
+            <input type="radio" name="q4" value="programacao">
+            Tentaria criar uma solução usando programação
+        </label>
+
+        <label>
+            <input type="radio" name="q4" value="designer">
+            Pensaria em como melhorar a experiência do usuário
+        </label>
+
+        <label>
+            <input type="radio" name="q4" value="redes">
+            Verificaria a conexão e a rede
+        </label>
+
+        <label>
+            <input type="radio" name="q4" value="ciberseguranca">
+            Procuraria descobrir se existe algum problema de segurança
+        </label>
+
+    </section>
+
+
+    <!-- RESULTADO -->
+
+    <button
+        type="button"
+        class="btn-resultado"
+        onclick="mostrarResultado()">
+
+        Ver meu avatar
+
+    </button>
+
+
+    <!-- AVATAR ESCOLHIDO -->
+
+    <section
+        id="resultado"
+        class="resultado-container"
+        hidden>
+    </section>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

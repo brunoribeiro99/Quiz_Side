@@ -1,0 +1,960 @@
+:root {
+    /* Fundo Escuro AgroTech */
+    --bg-deep: #080d0a;
+    --bg-nebula-1: #0f2918;
+    --bg-nebula-2: #091a12;
+    --panel: #111a14;
+    --panel-dark: #0b120e;
+    --panel-line: #1e3827;
+
+    /* Textos / Tipografia */
+    --ink: #f0fdf4;
+    --ink-dim: #86efac;
+    --ink-muted: #4ade80;
+
+    /* Dourado Safra / Colheita */
+    --gold: #eab308;
+    --gold-light: #fde047;
+    --gold-dim: #715504;
+
+    /* Verde AgroTech / Folha Neon (Destaque Principal) */
+    --agro-green: #22c55e;
+    --agro-light: #4ade80;
+    --agro-dark: #15803d;
+
+    --shadow: rgba(0, 0, 0, 0.45);
+}
+
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--ink);
+    font-family:
+        'Space Grotesk',
+        'Segoe UI',
+        Arial,
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            ellipse 80% 50% at 15% 0%,
+            var(--bg-nebula-1) 0%,
+            transparent 60%
+        ),
+        radial-gradient(
+            ellipse 70% 60% at 100% 30%,
+            var(--bg-nebula-2) 0%,
+            transparent 55%
+        ),
+        var(--bg-deep);
+}
+
+/* =========================================================
+   CONTAINER BOOTSTRAP
+   ========================================================= */
+
+main.container {
+    max-width: 1050px;
+    position: relative;
+}
+
+/* =========================================================
+   TÍTULO PRINCIPAL
+   ========================================================= */
+
+main > .text-center:first-child {
+    position: relative;
+    padding: 30px 10px 35px;
+}
+
+main > .text-center:first-child::before {
+    content: "AgroSide | Seu Lado Agro";
+    display: block;
+    margin-bottom: 18px;
+    color: var(--agro-light);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+main > .text-center:first-child::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 2px;
+    margin: 25px auto 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--agro-green),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px rgba(34, 197, 94, .4);
+}
+
+/* =========================================================
+   H1
+   ========================================================= */
+
+h1 {
+    margin: 0 0 18px;
+    color: var(--ink);
+    font-size: clamp(2.1rem, 5vw, 3.2rem);
+    line-height: 1.05;
+    font-weight: 750;
+    letter-spacing: -.03em;
+
+    text-shadow:
+        0 0 20px rgba(34, 197, 94, .25),
+        0 0 30px rgba(234, 179, 8, .12);
+}
+
+/* =========================================================
+   TEXTO INTRODUTÓRIO
+   ========================================================= */
+
+main > .text-center:first-child .lead {
+    max-width: 650px;
+    margin: 0 auto;
+    color: var(--ink-dim);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   CARDS PRINCIPAIS
+   ========================================================= */
+
+.card {
+    position: relative;
+    margin-bottom: 28px !important;
+    color: var(--ink);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 26, 20, .98),
+            rgba(11, 18, 14, .98)
+        );
+
+    border: 1px solid var(--panel-line);
+    border-radius: 5px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, .25),
+        inset 0 1px 0 rgba(255, 255, 255, .025);
+
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--agro-green),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px rgba(34, 197, 94, .45);
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 6px;
+    height: 6px;
+
+    background: var(--agro-light);
+    opacity: .65;
+
+    box-shadow:
+        0 0 10px rgba(74, 222, 128, .55);
+}
+
+/* =========================================================
+   CARD BODY
+   ========================================================= */
+
+.card-body {
+    padding: 30px;
+}
+
+/* =========================================================
+   TÍTULOS DOS CARDS
+   ========================================================= */
+
+.card-title {
+    margin: 0 0 28px !important;
+    color: var(--ink);
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+}
+
+.card-title::before {
+    content: "// ";
+    color: var(--agro-light);
+}
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+.form-label {
+    display: block;
+    margin-bottom: 11px;
+    color: var(--ink);
+    font-size: .94rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   CAMPOS DE TEXTO
+   ========================================================= */
+
+.form-control,
+.form-select {
+    min-height: 50px;
+    color: var(--ink) !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0e1711,
+            #09100c
+        ) !important;
+
+    border: 1px solid var(--panel-line) !important;
+    border-radius: 4px;
+    box-shadow: none !important;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+}
+
+.form-control::placeholder {
+    color: #4b6b55;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--agro-green) !important;
+    background: #0d1710 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(34, 197, 94, .12),
+        0 0 18px rgba(34, 197, 94, .15) !important;
+
+    outline: none;
+}
+
+.form-select {
+    cursor: pointer;
+}
+
+/* =========================================================
+   ÁREA DE INFORMAÇÕES PESSOAIS
+   ========================================================= */
+
+#pessoais .row {
+    row-gap: 20px;
+}
+
+/* =========================================================
+   CUSTOMIZAÇÃO DE GÊNERO / IDENTIDADE
+   ========================================================= */
+
+.btn-genero-masculino,
+.btn-genero-feminino,
+.btn-genero-trans {
+    border: 2px solid var(--panel-line);
+    background: linear-gradient(145deg, #111a14, #0b120e);
+    color: var(--ink-dim);
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.icone-genero {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.btn-genero-masculino:hover,
+.btn-genero-feminino:hover,
+.btn-genero-trans:hover {
+    transform: translateY(-2px);
+    border-color: var(--agro-light);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .25);
+    color: var(--ink);
+}
+
+.btn-genero-masculino {
+    border-color: #0d4a25;
+    background: linear-gradient(135deg, #09120c 0%, #143520 100%);
+    color: #38bdf8;
+}
+input[type="radio"]#generoMasculino:checked + .btn-genero-masculino {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    color: #fff !important;
+    border: 3px solid #38bdf8 !important;
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
+}
+
+.btn-genero-feminino {
+    border-color: #9d174d;
+    background: linear-gradient(135deg, #09120c 0%, #831843 100%);
+    color: #f472b6;
+}
+input[type="radio"]#generoFeminino:checked + .btn-genero-feminino {
+    background: linear-gradient(135deg, #db2777 0%, #be185d 100%) !important;
+    color: #fff !important;
+    border: 3px solid #f472b6 !important;
+    box-shadow: 0 0 18px rgba(244, 114, 182, 0.6);
+}
+
+.btn-genero-trans {
+    border-color: #581c87;
+    background: linear-gradient(135deg, #09120c 0%, #581c87 100%);
+    color: #c084fc;
+}
+input[type="radio"]#generoTrans:checked + .btn-genero-trans {
+    background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%) !important;
+    color: #fff !important;
+    border: 3px solid #c084fc !important;
+    box-shadow: 0 0 18px rgba(192, 132, 252, 0.6);
+}
+
+/* =========================================================
+   SELEÇÃO DE TOM DE PELE
+   ========================================================= */
+
+.tom-pele-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.tom-pele-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 8px;
+    transition: transform 0.2s ease;
+}
+
+.tom-pele-card input[type="radio"] {
+    display: none;
+}
+
+.tom-pele-box {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    border: 2px solid var(--panel-line);
+    background-size: cover;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.skin-clara {
+    background: linear-gradient(135deg, #ffd3b6 0%, #f1c7a5 100%);
+}
+
+.skin-escura {
+    background: linear-gradient(135deg, #8d5b42 0%, #523121 100%);
+}
+
+.tom-pele-brilho {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.tom-pele-nome {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-dim);
+    transition: color 0.2s ease;
+}
+
+.tom-pele-card:hover {
+    transform: translateY(-3px);
+}
+
+.tom-pele-card:hover .tom-pele-box {
+    border-color: var(--agro-light);
+    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.3);
+}
+
+.tom-pele-card:hover .tom-pele-nome {
+    color: var(--ink);
+}
+
+.tom-pele-card input[type="radio"]:checked + .tom-pele-box {
+    border: 3px solid var(--agro-green) !important;
+    transform: scale(1.12);
+    box-shadow: 
+        0 0 20px rgba(34, 197, 94, 0.6),
+        inset 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.tom-pele-card input[type="radio"]:checked ~ .tom-pele-nome {
+    color: var(--agro-light);
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+/* =========================================================
+   PERGUNTAS E ALTERNATIVAS
+   ========================================================= */
+
+.quiz-question {
+    position: relative;
+    padding: 10px 0;
+}
+
+.quiz-question h3 {
+    margin-bottom: 24px;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+}
+
+.form-check {
+    position: relative;
+    width: 100%;
+    min-height: 68px;
+
+    display: flex;
+    align-items: center;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #cbd5e1;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111a14,
+            #0b120e
+        );
+
+    border: 1px solid var(--panel-line);
+    border-radius: 6px;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition:
+        border-color .18s ease,
+        background .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+.form-check::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    background: transparent;
+    transition: background .18s ease, box-shadow .18s ease;
+}
+
+.form-check:hover {
+    color: var(--ink);
+    background:
+        linear-gradient(
+            145deg,
+            #15241b,
+            #0e1812
+        );
+    border-color: rgba(74, 222, 128, .5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .25), 0 0 15px rgba(34, 197, 94, .1);
+}
+
+.form-check:hover::before {
+    background: var(--agro-green);
+    box-shadow: 0 0 10px rgba(34, 197, 94, .6);
+}
+
+.form-check-input {
+    position: relative;
+    flex: none;
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 13px 0 16px !important;
+    background-color: #070d09 !important;
+    border: 1px solid #23432e !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.form-check-input[type="radio"] {
+    border-radius: 50%;
+}
+
+.form-check-input:checked {
+    background-color: var(--agro-green) !important;
+    border-color: var(--agro-green) !important;
+    box-shadow: 0 0 12px rgba(34, 197, 94, .5) !important;
+}
+
+.form-check:has(.form-check-input:checked) {
+    color: #fff;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34, 197, 94, 0.15),
+            rgba(11, 18, 14, 1)
+        );
+    border: 2px solid var(--agro-green);
+    box-shadow:
+        inset 0 0 25px rgba(34, 197, 94, .08),
+        0 0 18px rgba(34, 197, 94, .15);
+}
+
+.form-check-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-height: 68px;
+    padding: 13px 15px 13px 0;
+    color: inherit;
+    font-size: .92rem;
+    font-weight: 500;
+    line-height: 1.45;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* =========================================================
+   BOTÕES GERAIS
+   ========================================================= */
+
+.btn {
+    position: relative;
+    min-height: 50px;
+    padding: 13px 26px !important;
+    color: #061f10 !important;
+    font-size: .95rem !important;
+    font-weight: 700 !important;
+    background:
+        linear-gradient(
+            135deg,
+            var(--agro-light),
+            var(--agro-green)
+        ) !important;
+    border: 1px solid var(--agro-green) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+
+.btn:hover {
+    color: #061f10 !important;
+    transform: translateY(-2px);
+    filter: brightness(1.07);
+    box-shadow: 0 8px 25px rgba(34, 197, 94, .3);
+}
+
+.btn:active {
+    transform: translateY(0) !important;
+}
+
+/* =========================================================
+   NAVEGAÇÃO DO QUIZ (SETAS)
+   ========================================================= */
+
+.quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 35px;
+    width: 100%;
+}
+
+.quiz-arrow {
+    position: relative;
+    width: 85px;
+    height: 48px;
+    border: 1px solid var(--panel-line);
+    background: var(--panel-dark);
+    color: var(--agro-light);
+    font-size: 25px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.quiz-next {
+    clip-path: polygon(0 0, 78% 0, 100% 50%, 78% 100%, 0 100%, 18% 50%);
+    padding-left: 8px;
+}
+
+.quiz-back {
+    clip-path: polygon(22% 0, 100% 0, 82% 50%, 100% 100%, 22% 100%, 0 50%);
+    padding-right: 8px;
+}
+
+.quiz-arrow:not(:disabled):hover {
+    background: #142419;
+    color: #fff;
+    border-color: var(--agro-green);
+    transform: translateY(-3px);
+}
+
+.quiz-arrow:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+/* Botão Ver Pontuação (Estilo Banner Dourado Safra) */
+.btn-resultado {
+    width: auto;
+    min-width: 180px;
+    padding: 14px 45px 14px 25px;
+
+    border: 2px solid var(--gold);
+
+    background: linear-gradient(
+        100deg,
+        #1c2e21,
+        #0b160e
+    );
+
+    color: var(--gold-light);
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+    position: relative;
+
+    clip-path: polygon(
+        0 0,
+        88% 0,
+        100% 50%,
+        88% 100%,
+        0 100%,
+        8% 50%
+    );
+
+    transition: all 0.2s ease;
+}
+
+.btn-resultado:hover:not(:disabled) {
+    transform: translateX(3px);
+    filter: brightness(1.15);
+    box-shadow: 0 0 15px rgba(234, 179, 8, .35);
+}
+
+.btn-resultado:active:not(:disabled) {
+    transform: translateX(1px);
+}
+
+.btn-resultado:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   RESULTADO RPG — 2 COLUNAS E COMPONENTES
+   ========================================================= */
+
+#resultado {
+    margin-top: 35px;
+    color: var(--ink);
+    width: 100%;
+}
+
+.resultado-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 0 50px;
+}
+
+.resultado-grid {
+    display: grid !important;
+    grid-template-columns: 340px 1fr !important;
+    gap: 25px !important;
+    align-items: start !important;
+    width: 100% !important;
+}
+
+.resultado-coluna-esquerda {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100% !important;
+}
+
+.resultado-coluna-direita {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+}
+
+/* Card do Avatar */
+.avatar-card {
+    background: #0d1711;
+    border: 1px solid var(--panel-line);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.avatar-resultado {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-resultado img {
+    max-width: 100%;
+    max-height: 380px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.avatar-nome {
+    margin-top: 15px;
+    color: var(--ink);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Botão Baixar Avatar */
+.btn-baixar-avatar {
+    width: 100%;
+    min-height: 50px;
+    padding: 13px 26px;
+    color: #061f10;
+    font-size: .95rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+
+.btn-baixar-avatar:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.07);
+    box-shadow: 0 8px 25px rgba(234, 179, 8, .3);
+}
+
+/* Card da Classe Principal */
+.classe-principal {
+    background: #0d1711;
+    border: 1px solid var(--panel-line);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+.classe-principal .icone img,
+.icone-classe img {
+    width: 48px !important;
+    height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+    object-fit: contain;
+    display: inline-block;
+}
+
+.classe-principal .icone {
+    margin-bottom: 12px;
+}
+
+.classe-principal .titulo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--agro-light);
+    margin-bottom: 5px;
+}
+
+.classe-principal h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 5px 0;
+    color: var(--ink);
+}
+
+.classe-principal .pontos {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 15px;
+}
+
+.rpg-descricao {
+    font-size: 0.92rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Tabela RPG de Atributos */
+.tabela-rpg {
+    background: #0d1711;
+    border: 1px solid var(--panel-line);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.tabela-rpg-titulo {
+    padding: 15px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--panel-line);
+    color: var(--gold-light);
+}
+
+.rpg-linha {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(30, 56, 39, 0.5);
+}
+
+.rpg-linha:last-child {
+    border-bottom: none;
+}
+
+.rpg-classe {
+    width: 160px;
+    min-width: 160px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.rpg-xp {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.barra-xp {
+    flex: 1;
+    height: 14px;
+    background: #09120c;
+    border: 1px solid #1e3827;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.barra-xp-preenchida {
+    height: 100%;
+    background: linear-gradient(90deg, var(--agro-dark) 0%, var(--agro-green) 50%, var(--agro-light) 100%);
+    border-radius: 999px;
+    transition: width 0.8s ease-in-out;
+}
+
+.rpg-pontos {
+    min-width: 45px;
+    text-align: right;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--ink);
+}
+
+/* =========================================================
+   RESPONSIVIDADE GERAL
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .resultado-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 576px) {
+    main.container {
+        padding-left: 13px !important;
+        padding-right: 13px !important;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+:focus-visible {
+    outline: 2px solid var(--agro-green) !important;
+    outline-offset: 3px;
+}

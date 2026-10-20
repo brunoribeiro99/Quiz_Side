@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgroSide - Quiz</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS do AgroSide -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <main class="container py-5">
+
+        <!-- TÍTULO -->
+        <div class="text-center mb-5">
+            <h1>Bem-vindo ao AgroSide!</h1>
+            <p>
+                Descubra o lado da inovação no campo que mais combina com você.
+            </p>
+        </div>
+
+        <!-- ETAPA 0: DADOS PESSOAIS -->
+<div id="perguntaDados" class="quiz-question">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">Seus Dados de Aventureiro</h2>
+
+            <div class="row g-3" id="pessoais">
+                <!-- Nome Completo -->
+                <div class="col-12">
+                    <label for="nome" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <!-- Apelido / Nickname + Gênero (Lado a Lado) -->
+                <div class="col-12 col-md-7">
+                    <label for="nickname" class="form-label">Como quer ser chamado no jogo?</label>
+                    <input type="text" class="form-control" id="nickname" placeholder="Digite seu apelido ou nome social" required>
+                </div>
+
+                <div class="col-12 col-md-5">
+                    <label for="generoReal" class="form-label">Gênero</label>
+                    <select class="form-select" id="generoReal" required>
+                        <option value="" selected disabled>Selecione seu gênero</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Não-binário">Não-binário</option>
+                        <option value="Transgênero">Transgênero</option>
+                        <option value="Outro">Outro</option>
+                        <option value="Prefiro não informar">Prefiro não informar</option>
+                    </select>
+                </div>
+
+                <!-- Email -->
+                <div class="col-12">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+
+                <!-- Idade + Celular -->
+                <div class="col-5 col-md-4">
+                    <label for="idade" class="form-label">Idade</label>
+                    <input type="number" class="form-control" id="idade" placeholder="Ex: 17" min="10" max="99" required>
+                </div>
+
+                <div class="col-7 col-md-8">
+                    <label for="celular" class="form-label">Celular / WhatsApp</label>
+                    <input type="tel" class="form-control" id="celular" placeholder="(17) 4002-8922" maxlength="15" required>
+                </div>
+            </div>
+
+                    <!-- GÊNERO / IDENTIDADE -->
+                    <div class="mt-4 mb-4">
+                        <label class="form-label text-center d-block mb-3">
+                            Qual é o genero do seu personagem?
+                        </label>
+
+                        <div class="row g-2 justify-content-center">
+                            <div class="col-4 col-md-3">
+                                <input type="radio" class="btn-check" name="genero" id="generoMasculino" value="masculino" autocomplete="off">
+                                <label class="btn btn-genero-masculino w-100 py-3 text-center" for="generoMasculino">
+                                    <img src="img/icon/masculino.png" alt="Masculino" class="icone-genero">
+                                    <br>
+                                    Masc
+                                </label>
+                            </div>
+
+                            <div class="col-4 col-md-3">
+                                <input type="radio" class="btn-check" name="genero" id="generoFeminino" value="feminino" autocomplete="off">
+                                <label class="btn btn-genero-feminino w-100 py-3 text-center" for="generoFeminino">
+                                    <img src="img/icon/feminino.png" alt="Feminino" class="icone-genero">
+                                    <br>
+                                    Fem
+                                </label>
+                            </div>
+
+                            <div class="col-4 col-md-3">
+                                <input type="radio" class="btn-check" name="genero" id="generoTrans" value="trans" autocomplete="off">
+                                <label class="btn btn-genero-trans w-100 py-3 text-center" for="generoTrans">
+                                    <img src="img/icon/transgenero.png" alt="Trans" class="icone-genero">
+                                    <br>
+                                    Não quero informar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOM DE PELE -->
+                    <div class="mt-4 mb-2">
+                        <label class="form-label text-center d-block mb-2">Tom de Pele do Avatar</label>
+                        <div class="tom-pele-container">
+                            <label class="tom-pele-card">
+                                <input type="radio" name="tomPele" value="clara" required>
+                                <div class="tom-pele-box skin-clara">
+                                    <span class="tom-pele-brilho"></span>
+                                </div>
+                                <span class="tom-pele-nome">Pele Clara</span>
+                            </label>
+
+                            <label class="tom-pele-card">
+                                <input type="radio" name="tomPele" value="escura">
+                                <div class="tom-pele-box skin-escura">
+                                    <span class="tom-pele-brilho"></span>
+                                </div>
+                                <span class="tom-pele-nome">Pele Escura</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- NAVEGAÇÃO -->
+                    <div class="quiz-nav justify-content-center">
+                        <button type="button" class="quiz-arrow quiz-next" id="btnProximaDados" aria-label="Próxima pergunta" disabled>
+                            →
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO QUIZ COM TODAS AS PERGUNTAS -->
+        <section class="quiz-section" id="quiz">
+
+            <!-- PERGUNTA 01 -->
+            <div class="quiz-question" id="pergunta1">
+                <h3>01. Se você pudesse escolher uma missão, qual seria?</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1a" value="Tech">
+                            <label class="form-check-label" for="q1a">
+                                Criar tecnologias para facilitar a vida
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1b" value="Prod">
+                            <label class="form-check-label" for="q1b">
+                                Produzir alimentos de forma sustentável
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1c" value="Eco">
+                            <label class="form-check-label" for="q1c">
+                                Cuidar da natureza e dos recursos naturais
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1d" value="Lab">
+                            <label class="form-check-label" for="q1d">
+                                Descobrir soluções para grandes desafios
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar1" aria-label="Voltar">
+                        ←
+                    </button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima1" aria-label="Próxima pergunta" disabled>
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 02 -->
+            <div class="quiz-question" id="pergunta2">
+                <h3>02. Você visita uma fazenda supertecnológica. O que chama sua atenção?</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2a" value="Tech">
+                            <label class="form-check-label" for="q2a">
+                                Os drones e equipamentos inteligentes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2b" value="Prod">
+                            <label class="form-check-label" for="q2b">
+                                As plantações e os diferentes cultivos
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2c" value="Eco">
+                            <label class="form-check-label" for="q2c">
+                                A preservação das florestas e da água
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2d" value="Lab">
+                            <label class="form-check-label" for="q2d">
+                                Os experimentos e as novas descobertas
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar2" aria-label="Voltar">
+                        ←
+                    </button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima2" aria-label="Próxima pergunta" disabled>
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 03 -->
+            <div class="quiz-question" id="pergunta3">
+                <h3>03. Um produtor está com problemas na plantação. O que você faria?</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3a" value="Lab">
+                            <label class="form-check-label" for="q3a">
+                                Investigaria a causa do problema
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3b" value="Tech">
+                            <label class="form-check-label" for="q3b">
+                                Procuraria uma solução tecnológica
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3c" value="Prod">
+                            <label class="form-check-label" for="q3c">
+                                Conversaria com pessoas experientes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3d" value="Lab">
+                            <label class="form-check-label" for="q3d">
+                                Testaria diferentes alternativas
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar3" aria-label="Voltar">
+                        ←
+                    </button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima3" aria-label="Próxima pergunta" disabled>
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 04 -->
+            <div class="quiz-question" id="pergunta4">
+                <h3>04. Qual dessas experiências você gostaria de viver?</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4a" value="Tech">
+                            <label class="form-check-label" for="q4a">
+                                Pilotar um drone sobre uma lavoura
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4b" value="Prod">
+                            <label class="form-check-label" for="q4b">
+                                Cultivar alimentos em uma estufa
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4c" value="Lab">
+                            <label class="form-check-label" for="q4c">
+                                Analisar amostras em um laboratório
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4d" value="Eco">
+                            <label class="form-check-label" for="q4d">
+                                Participar de um projeto ambiental
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar4" aria-label="Voltar">
+                        ←
+                    </button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima4" aria-label="Próxima pergunta" disabled>
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 05 -->
+            <div class="quiz-question" id="pergunta5">
+                <h3>05. Se você pudesse inventar algo para o futuro, o que seria?</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5a" value="Tech">
+                            <label class="form-check-label" for="q5a">
+                                Uma máquina que trabalha sozinha no campo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5b" value="Lab">
+                            <label class="form-check-label" for="q5b">
+                                Uma planta mais resistente ao calor
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5c" value="Eco">
+                            <label class="form-check-label" for="q5c">
+                                Uma tecnologia que economiza água
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5d" value="Tech">
+                            <label class="form-check-label" for="q5d">
+                                Um aplicativo que ajuda os produtores
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar5" aria-label="Voltar">
+                        ←
+                    </button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima5" aria-label="Próxima pergunta" disabled>
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 06 -->
+            <div class="quiz-question" id="pergunta6">
+                <h3>06. Em um trabalho em equipe, qual papel mais combina com você?</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6a" value="Tech">
+                            <label class="form-check-label" for="q6a">
+                                Ter ideias criativas e inovadoras
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6b" value="Prod">
+                            <label class="form-check-label" for="q6b">
+                                Organizar e planejar as atividades
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6c" value="Prod">
+                            <label class="form-check-label" for="q6c">
+                                Colocar a mão na massa
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6d" value="Lab">
+                            <label class="form-check-label" for="q6d">
+                                Analisar os resultados e propor melhorias
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar6" aria-label="Voltar">
+                        ←
+                    </button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima6" aria-label="Próxima pergunta" disabled>
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 07 -->
+            <div class="quiz-question" id="pergunta7">
+                <h3>07. Qual desses desafios você gostaria de ajudar a resolver?</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7a" value="Prod">
+                            <label class="form-check-label" for="q7a">
+                                Produzir mais alimentos com menos recursos
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7b" value="Eco">
+                            <label class="form-check-label" for="q7b">
+                                Reduzir os impactos ambientais
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7c" value="Tech">
+                            <label class="form-check-label" for="q7c">
+                                Levar tecnologia para as propriedades rurais
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7d" value="Lab">
+                            <label class="form-check-label" for="q7d">
+                                Melhorar a qualidade dos alimentos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar7" aria-label="Voltar">
+                        ←
+                    </button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima7" aria-label="Próxima pergunta" disabled>
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 08 -->
+            <div class="quiz-question" id="pergunta8">
+                <h3>08. Como você imagina seu futuro profissional?</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8a" value="Tech">
+                            <label class="form-check-label" for="q8a">
+                                Trabalhando com tecnologia e inovação
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8b" value="Lab">
+                            <label class="form-check-label" for="q8b">
+                                Desenvolvendo pesquisas e descobertas
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8c" value="Prod">
+                            <label class="form-check-label" for="q8c">
+                                Atuando diretamente no campo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8d" value="Prod">
+                            <label class="form-check-label" for="q8d">
+                                Liderando projetos e negócios do agro
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NAVEGAÇÃO DA PERGUNTA 08 -->
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar8" aria-label="Voltar">
+                        ←
+                    </button>
+                    <button type="button" class="btn-resultado" id="btnVerPontuacao">
+                        Pontuação
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SEÇÃO DO RESULTADO -->
+        <section id="resultado" class="resultado-container" hidden>
+        </section>
+
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/animacao.js"></script>
+    <script src="./js/avatar.js"></script>
+    <script src="./js/contatos.js"></script>
+</body>
+
+</html>

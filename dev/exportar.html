@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSide - Exportar contatos</title>
+    <style>
+        body {
+            background: #0a0a14;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        #total {
+            font-size: 1.3rem;
+            margin-bottom: 24px;
+        }
+        #btnBaixar {
+            font-size: 1.5rem;
+            padding: 20px 48px;
+            border: none;
+            border-radius: 12px;
+            background: #f5b942;
+            color: #111;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #btnBaixar:hover {
+            background: #ffcf6b;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exportar contatos</h1>
+    <p id="total"></p>
+    <button type="button" id="btnBaixar">Baixar contatos</button>
+
+    <script>
+        const lista = JSON.parse(localStorage.getItem("contatosDevside")) || [];
+
+        document.getElementById("total").textContent =
+            lista.length + " contato(s) salvo(s) neste navegador";
+
+        document.getElementById("btnBaixar").addEventListener("click", function () {
+
+            if (lista.length === 0) {
+                alert("Ainda não há contatos salvos.");
+                return;
+            }
+
+            const texto = JSON.stringify(lista, null, 2);
+            const arquivo = new Blob([texto], { type: "text/plain;charset=utf-8" });
+
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(arquivo);
+            link.download = "contatos-devside.txt";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(link.href);
+        });
+    </script>
+
+</body>
+</html>

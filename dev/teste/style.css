@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: white;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+.generos {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.genero-btn {
+  border: 2px solid #444;
+  background: #171717;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.genero-btn:hover {
+  border-color: #f58427;
+}
+
+.genero-btn.ativo {
+  background: #f58427;
+  border-color: #f58427;
+  color: #111;
+  font-weight: bold;
+}
+
+.area {
+  margin-bottom: 45px;
+}
+
+.area h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-left: 5px solid #f58427;
+  padding-left: 12px;
+}
+
+.avatares {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.avatar-card {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.avatar-card:hover {
+  transform: translateY(-5px);
+  border-color: #f58427;
+}
+
+.avatar-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  display: block;
+}
+
+.avatar-nome {
+  margin-top: 10px;
+  color: #ccc;
+  font-size: 14px;
+}
+.avatar-card.selecionado {
+  border: 3px solid #f58427;
+  background: #1d1d1d;
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(245, 132, 39, 0.35);
+}
+.avatar-card.selecionado .avatar-nome {
+  color: #f58427;
+  font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+  .avatares {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .avatares {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .avatares {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .avatar-card img {
+    height: 180px;
+  }
+}
