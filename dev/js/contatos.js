@@ -1,54 +1,60 @@
-let indiceContato = null;
+/* =========================================================
+   CONTATOS.JS — ENVIO DE DADOS PARA A PLANILHA (DEVSIDE)
+   ========================================================= */
 
-function salvarContatoInicial() {
-    const lista = JSON.parse(localStorage.getItem("contatosDevside")) || [];
+const ENDPOINT_PLANILHA = "https://api.sheetmonkey.io/form/8cBBsYzaLpR54UuK9HKCRL";
 
-    const contato = {
-        nome: document.getElementById("nome").value.trim(),
-        celular: document.getElementById("celular").value.trim(),
-        avatar: "",
-        data: new Date().toLocaleString("pt-BR")
-    };
+function enviarParaPlanilha(dados) {
+    // Identificador fixo para saber de qual quiz vieram os dados
+    dados.Curso = "DevSide";
 
-    if (indiceContato === null) {
-        // Primeira vez: acrescenta no final da lista
-        lista.push(contato);
-        indiceContato = lista.length - 1;
-    } else {
-        // Se a pessoa voltou e avançou de novo, atualiza o mesmo registro
-        lista[indiceContato] = contato;
-    }
-
-    localStorage.setItem("contatosDevside", JSON.stringify(lista));
+    fetch(ENDPOINT_PLANILHA, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(resposta => {
+        if (resposta.ok) {
+            console.log("✅ [DevSide] Dados enviados para a planilha com sucesso!");
+        } else {
+            console.warn("⚠️ [DevSide] Falha ao enviar para a planilha.");
+        }
+    })
+    .catch(erro => {
+        console.error("❌ [DevSide] Erro na requisição:", erro);
+    });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const btnProximaDados = document.getElementById("btnProximaDados");
 
-    if (btnProximaDados) {
-        btnProximaDados.addEventListener("click", salvarContatoInicial);
-    }
-});
-document.addEventListener("DOMContentLoaded", function () {
-    const celular = document.getElementById("celular");
+/* =========================================================
+   RECOLHA E DISPARO DOS DADOS DO PARTICIPANTE
+   ========================================================= */
 
-    if (!celular) return;
+function salvarDadosParticipante(areaVencedora, linkAvatar) {
+    // 1. Captura o gênero real escolhido no dropdown
+    const generoRealSel = document.getElementById("generoReal")?.value || "";
 
-    celular.setAttribute("maxlength", "15");
+    // 2. Captura o gênero selecionado para o avatar
+    const generoAvatarSel = document.querySelector('input[name="genero"]:checked')?.value || "";
 
-    celular.addEventListener("input", function () {
-        let n = celular.value.replace(/\D/g, "").slice(0, 11);
+    // 3. Captura o tom de pele do avatar
+    const tomPeleSel = document.querySelector('input[name="tomPele"]:checked')?.value || "";
 
-        if (n.length > 10) {
-            n = n.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, "($1) $2-$3");
-        } else if (n.length > 6) {
-            n = n.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-        } else if (n.length > 2) {
-            n = n.replace(/^(\d{2})(\d{0,5}).*/, "($1) $2");
-        } else if (n.length > 0) {
-            n = n.replace(/^(\d{0,2}).*/, "($1");
-        }
+    const dadosParaSalvar = {
+        Nome: document.getElementById("nome")?.value.trim() || "",
+        Apelido: document.getElementById("nickname")?.value.trim() || "",
+        Celular: document.getElementById("celular")?.value.trim() || "",
+        Email: document.getElementById("email")?.value.trim() || "",
+        Idade: document.getElementById("idade")?.value.trim() || "",
+        Genero: generoRealSel,              // Preenche a coluna principal com o dropdown
+        GeneroAvatar: generoAvatarSel,      // Identifica o modelo visual escolhido
+        TomPele: tomPeleSel,
+        Area: areaVencedora || "",
+        LinkAvatar: linkAvatar || "",
+        Data: new Date().toLocaleString("pt-BR")
+    };
 
-        celular.value = n;
-    });
-});
+    enviarParaPlanilha(dadosParaSalvar);
+}

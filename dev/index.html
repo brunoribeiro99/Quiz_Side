@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>DevSide - Quiz</title>
 
     <!-- Bootstrap -->
@@ -18,1309 +17,473 @@
 
     <main class="container py-5">
 
-        <!--TÍTULO-->
-
+        <!-- TÍTULO -->
         <div class="text-center mb-5">
-
             <h1>Bem-vindo ao DevSide!</h1>
-
-            <p>
-                Descubra o lado da tecnologia que mais combina com você.
-            </p>
-
+            <p>Descubra o lado da tecnologia que mais combina com você.</p>
         </div>
 
-<!-- DADOS PESSOAIS COMPACTOS -->
-<!-- ETAPA 0: DADOS PESSOAIS -->
-<div id="perguntaDados" class="quiz-question">
-    <div class="card mb-4">
-        <div class="card-body">
-            <h2 class="card-title">Seus Dados de Aventureiro</h2>
+        <section class="quiz-section" id="quiz">
 
-            <div class="row g-3" id="pessoais">
-                
-                <!-- Nome Completo -->
-                <div class="col-12">
-                    <label for="nome" class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Digite seu nome completo" required>
-                </div>
+            <!-- ETAPA 0: DADOS PESSOAIS -->
+            <div id="perguntaDados" class="quiz-question">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">Seus Dados de Aventureiro</h2>
 
-                <!-- Nickname + Gênero (lado a lado) -->
-                <div class="col-12 col-md-7">
-                    <label for="nickname" class="form-label">Apelido / Nome Social</label>
-                    <input type="text" class="form-control" id="nickname" placeholder="Como quer ser chamado" required>
-                </div>
+                        <div class="row g-3" id="pessoais">
+                            <!-- Nome Completo -->
+                            <div class="col-12">
+                                <label for="nome" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome completo" required>
+                            </div>
 
-                <div class="col-12 col-md-5">
-                    <label for="generoReal" class="form-label">Gênero</label>
-                    <select class="form-select" id="generoReal" required>
-                        <option value="" selected disabled>Selecione</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
-                        <option value="Não-binário">Não-binário</option>
-                        <option value="Transgênero">Transgênero</option>
-                        <option value="Outro">Outro</option>
-                        <option value="Prefiro não informar">Prefiro não informar</option>
-                    </select>
-                </div>
+                            <!-- Nickname + Gênero -->
+                            <div class="col-12 col-md-7">
+                                <label for="nickname" class="form-label">Apelido / Nome Social</label>
+                                <input type="text" class="form-control" id="nickname" placeholder="Como quer ser chamado" required>
+                            </div>
 
-                <!-- Email -->
-                <div class="col-12">
-                    <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com" required>
-                </div>
+                            <div class="col-12 col-md-5">
+                                <label for="generoReal" class="form-label">Gênero</label>
+                                <select class="form-select" id="generoReal" required>
+                                    <option value="" selected disabled>Selecione</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Não-binário">Não-binário</option>
+                                    <option value="Transgênero">Transgênero</option>
+                                    <option value="Outro">Outro</option>
+                                    <option value="Prefiro não informar">Prefiro não informar</option>
+                                </select>
+                            </div>
 
-                <!-- Idade + Celular -->
-                <div class="col-5 col-md-4">
-                    <label for="idade" class="form-label">Idade</label>
-                    <input type="number" class="form-control" id="idade" placeholder="Ex: 17" min="10" max="99" required>
-                </div>
+                            <!-- Email -->
+                            <div class="col-12">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com" required>
+                            </div>
 
-                <div class="col-7 col-md-8">
-                    <label for="celular" class="form-label">Celular / WhatsApp</label>
-                    <input type="tel" class="form-control" id="celular" placeholder="(17) 4002-8922" maxlength="15" required>
-                </div>
+                            <!-- Idade + Celular -->
+                            <div class="col-5 col-md-4">
+                                <label for="idade" class="form-label">Idade</label>
+                                <input type="number" class="form-control" id="idade" placeholder="Ex: 17" min="10" max="99" required>
+                            </div>
 
-            </div>
-            <!-- GÊNERO / IDENTIDADE -->
-       <div class="mt-4 mb-4">
-    <label class="form-label text-center d-block mb-3">
-        Qual é o genero do seu personagem?
-    </label>
-
-    <div class="row g-2 justify-content-center">
-
-        <div class="col-4 col-md-3">
-            <input
-                type="radio"
-                class="btn-check"
-                name="genero"
-                id="generoMasculino"
-                value="masculino"
-                autocomplete="off"
-            >
-
-            <label
-                class="btn btn-genero-masculino w-100 py-3 text-center"
-                for="generoMasculino"
-            >
-                <img
-                    src="img/icon/masculino.png"
-                    alt="Masculino"
-                    class="icone-genero"
-                >
-                <br>
-                Masc
-            </label>
-        </div>
-
-
-        <div class="col-4 col-md-3">
-            <input
-                type="radio"
-                class="btn-check"
-                name="genero"
-                id="generoFeminino"
-                value="feminino"
-                autocomplete="off"
-            >
-
-            <label
-                class="btn btn-genero-feminino w-100 py-3 text-center"
-                for="generoFeminino"
-            >
-                <img
-                    src="img/icon/feminino.png"
-                    alt="Feminino"
-                    class="icone-genero"
-                >
-                <br>
-                Fem
-            </label>
-        </div>
-
-
-        <div class="col-4 col-md-3">
-            <input
-                type="radio"
-                class="btn-check"
-                name="genero"
-                id="generoTrans"
-                value="trans"
-                autocomplete="off"
-            >
-
-            <label
-                class="btn btn-genero-trans w-100 py-3 text-center"
-                for="generoTrans"
-            >
-                <img
-                    src="img/icon/transgenero.png"
-                    alt="Trans"
-                    class="icone-genero"
-                >
-                <br>
-                Não quero informar
-            </label>
-        </div>
-
-    </div>
-</div>
-            </div>
-
-            <!-- TOM DE PELE -->
-            <div class="mt-4 mb-2">
-                <label class="form-label text-center d-block mb-2">Tom de Pele do Avatar</label>
-                <div class="tom-pele-container">
-                    <label class="tom-pele-card">
-                        <input type="radio" name="tomPele" value="clara" required>
-                        <div class="tom-pele-box skin-clara">
-                            <span class="tom-pele-brilho"></span>
+                            <div class="col-7 col-md-8">
+                                <label for="celular" class="form-label">Celular / WhatsApp</label>
+                                <input type="tel" class="form-control" id="celular" placeholder="(17) 4002-8922" maxlength="15" required>
+                            </div>
                         </div>
-                        <span class="tom-pele-nome">Pele Clara</span>
-                    </label>
 
-                    <label class="tom-pele-card">
-                        <input type="radio" name="tomPele" value="escura">
-                        <div class="tom-pele-box skin-escura">
-                            <span class="tom-pele-brilho"></span>
+                        <!-- GÊNERO / IDENTIDADE DO AVATAR -->
+                        <div class="mt-4 mb-4">
+                            <label class="form-label text-center d-block mb-3">Qual é o genero do seu personagem?</label>
+                            <div class="row g-2 justify-content-center">
+                                <div class="col-4 col-md-3">
+                                    <input type="radio" class="btn-check" name="genero" id="generoMasculino" value="masculino" autocomplete="off">
+                                    <label class="btn btn-genero-masculino w-100 py-3 text-center" for="generoMasculino">
+                                        <img src="img/icon/masculino.png" alt="Masculino" class="icone-genero"><br>Masc
+                                    </label>
+                                </div>
+
+                                <div class="col-4 col-md-3">
+                                    <input type="radio" class="btn-check" name="genero" id="generoFeminino" value="feminino" autocomplete="off">
+                                    <label class="btn btn-genero-feminino w-100 py-3 text-center" for="generoFeminino">
+                                        <img src="img/icon/feminino.png" alt="Feminino" class="icone-genero"><br>Fem
+                                    </label>
+                                </div>
+
+                                <div class="col-4 col-md-3">
+                                    <input type="radio" class="btn-check" name="genero" id="generoTrans" value="trans" autocomplete="off">
+                                    <label class="btn btn-genero-trans w-100 py-3 text-center" for="generoTrans">
+                                        <img src="img/icon/transgenero.png" alt="Trans" class="icone-genero"><br>Não quero informar
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <span class="tom-pele-nome">Pele Escura</span>
-                    </label>
+
+                        <!-- TOM DE PELE -->
+                        <div class="mt-4 mb-2">
+                            <label class="form-label text-center d-block mb-2">Tom de Pele do Avatar</label>
+                            <div class="tom-pele-container">
+                                <label class="tom-pele-card">
+                                    <input type="radio" name="tomPele" value="clara" required aria-label="Tom de pele 1">
+                                    <div class="tom-pele-box skin-clara"><span class="tom-pele-brilho"></span></div>
+                                </label>
+
+                                <label class="tom-pele-card">
+                                    <input type="radio" name="tomPele" value="escura" aria-label="Tom de pele 2">
+                                    <div class="tom-pele-box skin-escura"><span class="tom-pele-brilho"></span></div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- NAVEGAÇÃO DADOS -->
+                        <div class="quiz-nav justify-content-center">
+                            <button type="button" class="quiz-arrow quiz-next" id="btnProximaDados" aria-label="Próxima pergunta" disabled>→</button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
-            <!-- NAVEGAÇÃO -->
-            <div class="quiz-nav justify-content-center">
-                <button type="button" class="quiz-arrow quiz-next" id="btnProximaDados" aria-label="Próxima pergunta" disabled>
-                    →
-                </button>
-            </div>
-
-        </div>
-    </div>
-</div>
-        <!-- QUIZ-->
-
-        <section
-            class="quiz-section"
-            id="quiz">
-            <!--PERGUNTA 01 -->
-
-            <div
-                class="quiz-question"
-                id="pergunta1">
-
-                <h3>
-                    01. Você é uma pessoa extrovertida ou introvertida?
-                </h3>
-
-
+            <!-- PERGUNTA 01 -->
+            <div class="quiz-question" id="pergunta1">
+                <h3>01. Você se considera:</h3>
                 <div class="row">
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="q1"
-                                id="q1a"
-                                value="extrovertido">
-
-                            <label
-                                class="form-check-label"
-                                for="q1a">
-
-                                Extrovertido(a)
-
-                            </label>
-
+                            <input class="form-check-input" type="radio" name="q1" id="q1a" value="extrovertido">
+                            <label class="form-check-label" for="q1a">Extrovertido(a)</label>
                         </div>
-
                     </div>
-
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="q1"
-                                id="q1b"
-                                value="introvertido">
-
-                            <label
-                                class="form-check-label"
-                                for="q1b">
-
-                                Introvertido(a)
-
-                            </label>
-
+                            <input class="form-check-input" type="radio" name="q1" id="q1b" value="introvertido">
+                            <label class="form-check-label" for="q1b">Introvertido(a)</label>
                         </div>
-
                     </div>
-
                 </div>
-
-
                 <div class="quiz-nav">
-
-                    <button
-                        type="button"
-                        class="quiz-arrow quiz-back"
-                        id="btnVoltar1"
-                        aria-label="Voltar">
-
-                        ←
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="quiz-arrow quiz-next"
-                        id="btnProxima1"
-                        aria-label="Próxima pergunta"
-                        disabled>
-
-                        →
-
-                    </button>
-
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar1" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima1" aria-label="Próxima pergunta" disabled>→</button>
                 </div>
-
             </div>
 
-
-            <!--PERGUNTA 02 -->
-
-            <div
-                class="quiz-question"
-                id="pergunta2">
-
-                <h3>
-                    02. O que costuma chamar sua atenção ao acessar aplicativos ou sites?
-                </h3>
-
-
+            <!-- PERGUNTA 02 -->
+            <div class="quiz-question" id="pergunta2">
+                <h3>02. O que mais chama sua atenção em um site? (Responda 1 opção ou mais)</h3>
                 <div class="row">
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="q2"
-                                id="q2a"
-                                value="visual">
-
-                            <label
-                                class="form-check-label"
-                                for="q2a">
-
-                                A aparência e as cores
-
-                            </label>
-
+                            <input class="form-check-input" type="checkbox" name="q2" id="q2a" value="visual">
+                            <label class="form-check-label" for="q2a">Visual e cores</label>
                         </div>
-
                     </div>
-
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="q2"
-                                id="q2b"
-                                value="funcionalidade">
-
-                            <label
-                                class="form-check-label"
-                                for="q2b">
-
-                                As funções, ferramentas e como funciona
-
-                            </label>
-
+                            <input class="form-check-input" type="checkbox" name="q2" id="q2b" value="funcionalidade">
+                            <label class="form-check-label" for="q2b">Funcionalidades</label>
                         </div>
-
                     </div>
-
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="q2"
-                                id="q2c"
-                                value="velocidade">
-
-                            <label
-                                class="form-check-label"
-                                for="q2c">
-
-                                A velocidade e o desempenho da pagina
-
-                            </label>
-
+                            <input class="form-check-input" type="checkbox" name="q2" id="q2c" value="velocidade">
+                            <label class="form-check-label" for="q2c">Velocidade</label>
                         </div>
-
                     </div>
-
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                name="q2"
-                                id="q2d"
-                                value="seguranca">
-
-                            <label
-                                class="form-check-label"
-                                for="q2d">
-
-                                A segurança e privacidade da pagina 
-
-                            </label>
-
+                            <input class="form-check-input" type="checkbox" name="q2" id="q2d" value="seguranca">
+                            <label class="form-check-label" for="q2d">Segurança</label>
                         </div>
-
                     </div>
-
                 </div>
-
-
                 <div class="quiz-nav">
-
-                    <button
-                        type="button"
-                        class="quiz-arrow quiz-back"
-                        id="btnVoltar2"
-                        aria-label="Voltar">
-
-                        ←
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="quiz-arrow quiz-next"
-                        id="btnProxima2"
-                        aria-label="Próxima pergunta"
-                        disabled>
-
-                        →
-
-                    </button>
-
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar2" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima2" aria-label="Próxima pergunta" disabled>→</button>
                 </div>
-
             </div>
 
-
-            <!--PERGUNTA 03-->
-
-            <div
-                class="quiz-question"
-                id="pergunta3">
-
-                <h3>
-                    03. Qual desses desafios parece ser mais divertido?
-                </h3>
-
-
+            <!-- PERGUNTA 03 -->
+            <div class="quiz-question" id="pergunta3">
+                <h3>03. Qual desafio você prefere?</h3>
                 <div class="row">
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="q3"
-                                id="q3a"
-                                value="programar">
-
-                            <label
-                                class="form-check-label"
-                                for="q3a">
-
-                                Criar um programa ou jogo
-
-                            </label>
-
+                            <input class="form-check-input" type="radio" name="q3" id="q3a" value="programar">
+                            <label class="form-check-label" for="q3a">Criar programas ou jogos</label>
                         </div>
-
                     </div>
-
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="q3"
-                                id="q3b"
-                                value="design">
-
-                            <label
-                                class="form-check-label"
-                                for="q3b">
-
-                                Criar uma interface bonita
-
-                            </label>
-
+                            <input class="form-check-input" type="radio" name="q3" id="q3b" value="design">
+                            <label class="form-check-label" for="q3b">Criar interfaces</label>
                         </div>
-
                     </div>
-
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="q3"
-                                id="q3c"
-                                value="rede">
-
-                            <label
-                                class="form-check-label"
-                                for="q3c">
-
-                                Fazer computadores se conectarem
-
-                            </label>
-
+                            <input class="form-check-input" type="radio" name="q3" id="q3c" value="rede">
+                            <label class="form-check-label" for="q3c">Conectar computadores</label>
                         </div>
-
                     </div>
-
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="q3"
-                                id="q3d"
-                                value="seguranca">
-
-                            <label
-                                class="form-check-label"
-                                for="q3d">
-
-                                Descobrir e impedir uma invasão
-
-                            </label>
-
+                            <input class="form-check-input" type="radio" name="q3" id="q3d" value="seguranca">
+                            <label class="form-check-label" for="q3d">Impedir invasões</label>
                         </div>
-
                     </div>
-
-
                     <div class="col-md-6">
-
                         <div class="form-check">
-
-                            <input
-                                class="form-check-input"
-                                type="radio"
-                                name="q3"
-                                id="q3e"
-                                value="suporte">
-
-                            <label
-                                class="form-check-label"
-                                for="q3e">
-
-                                Resolver um problema de computador
-
-                            </label>
-
+                            <input class="form-check-input" type="radio" name="q3" id="q3e" value="suporte">
+                            <label class="form-check-label" for="q3e">Resolver problemas técnicos</label>
                         </div>
-
                     </div>
-
                 </div>
-
-
                 <div class="quiz-nav">
-
-                    <button
-                        type="button"
-                        class="quiz-arrow quiz-back"
-                        id="btnVoltar3"
-                        aria-label="Voltar">
-
-                        ←
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="quiz-arrow quiz-next"
-                        id="btnProxima3"
-                        aria-label="Próxima pergunta"
-                        disabled>
-
-                        →
-
-                    </button>
-
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar3" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima3" aria-label="Próxima pergunta" disabled>→</button>
                 </div>
-
             </div>
 
-
-            <!-- PERGUNTA 04            -->
-
-        <div class="quiz-question" id="pergunta4">
-
-            <h3>
-                04. Quando você tem dificuldade para usar um site ou aplicativo, qual é a primeira coisa que vem à sua
-                cabeça?
-            </h3>
-
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q4" id="q4a" value="entender">
-
-                        <label class="form-check-label" for="q4a">
-
-                            Quero entender como ele funciona
-
-                        </label>
-
+            <!-- PERGUNTA 04 -->
+            <div class="quiz-question" id="pergunta4">
+                <h3>04. Quando um site apresenta problemas, você:</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4a" value="entender">
+                            <label class="form-check-label" for="q4a">Tenta entender o funcionamento</label>
+                        </div>
                     </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q4" id="q4b" value="interface">
-
-                        <label class="form-check-label" for="q4b">
-
-                            Acho que a interface poderia ser melhor
-
-                        </label>
-
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4b" value="interface">
+                            <label class="form-check-label" for="q4b">Pensa em melhorar o visual</label>
+                        </div>
                     </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q4" id="q4c" value="ajuda">
-
-                        <label class="form-check-label" for="q4c">
-
-                            Procuro uma forma de resolver o problema
-
-                        </label>
-
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4c" value="ajuda">
+                            <label class="form-check-label" for="q4c">Busca uma solução</label>
+                        </div>
                     </div>
-
                 </div>
-
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar4" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima4" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
             </div>
 
-
-            <div class="quiz-nav">
-
-                <button type="button" class="quiz-arrow quiz-back" id="btnVoltar4" aria-label="Voltar">
-
-                    ←
-
-                </button>
-
-
-                <button type="button" class="quiz-arrow quiz-next" id="btnProxima4" aria-label="Próxima pergunta"
-                    disabled>
-
-                    →
-
-                </button>
-
+            <!-- PERGUNTA 05 -->
+            <div class="quiz-question" id="pergunta5">
+                <h3>05. Você tem curiosidade sobre como a internet funciona?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5a" value="sim">
+                            <label class="form-check-label" for="q5a">Sim</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5b" value="nao">
+                            <label class="form-check-label" for="q5b">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar5" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima5" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
             </div>
 
-        </div>
-
-
-        <!--  PERGUNTA 05   -->
-
-        <div class="quiz-question" id="pergunta5">
-
-            <h3>
-                05. Você já ficou curioso(a) sobre como a internet conecta pessoas e permite que você acesse sites e
-                aplicativos de qualquer lugar?
-            </h3>
-
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q5" id="q5a" value="sim">
-
-                        <label class="form-check-label" for="q5a">
-
-                            Sim, acho isso muito interessante
-
-                        </label>
-
+            <!-- PERGUNTA 06 -->
+            <div class="quiz-question" id="pergunta6">
+                <h3>06. O que mais combina com você?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6a" value="criar">
+                            <label class="form-check-label" for="q6a">Criar coisas</label>
+                        </div>
                     </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q5" id="q5b" value="nao">
-
-                        <label class="form-check-label" for="q5b">
-
-                            Nunca parei para pensar nisso
-
-                        </label>
-
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6b" value="resolver">
+                            <label class="form-check-label" for="q6b">Resolver problemas</label>
+                        </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6c" value="ajudar">
+                            <label class="form-check-label" for="q6c">Ajudar pessoas</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6d" value="explorar">
+                            <label class="form-check-label" for="q6d">Entender como tudo funciona</label>
+                        </div>
+                    </div>
                 </div>
-
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar6" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima6" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
             </div>
 
-
-            <div class="quiz-nav">
-
-                <button type="button" class="quiz-arrow quiz-back" id="btnVoltar5" aria-label="Voltar">
-
-                    ←
-
-                </button>
-
-
-                <button type="button" class="quiz-arrow quiz-next" id="btnProxima5" aria-label="Próxima pergunta"
-                    disabled>
-
-                    →
-
-                </button>
-
+            <!-- PERGUNTA 07 -->
+            <div class="quiz-question" id="pergunta7">
+                <h3>07. O que gostaria de aprender?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7a" value="programacao">
+                            <label class="form-check-label" for="q7a">Programação</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7b" value="design">
+                            <label class="form-check-label" for="q7b">Design</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7c" value="redes">
+                            <label class="form-check-label" for="q7c">Redes</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7d" value="seguranca">
+                            <label class="form-check-label" for="q7d">Segurança digital</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7e" value="suporte">
+                            <label class="form-check-label" for="q7e">Suporte técnico</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar7" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima7" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
             </div>
 
-        </div>
-
-
-        <!--  PERGUNTA 06 -->
-
-        <div class="quiz-question" id="pergunta6">
-
-            <h3>
-                06. Qual dessas frases mais combina com você?
-            </h3>
-
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q6" id="q6a" value="criar">
-
-                        <label class="form-check-label" for="q6a">
-
-                            Gosto de criar coisas novas
-
-                        </label>
-
+            <!-- PERGUNTA 08 -->
+            <div class="quiz-question" id="pergunta8">
+                <h3>08. Como prefere trabalhar?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8a" value="sozinho">
+                            <label class="form-check-label" for="q8a">Sozinho(a)</label>
+                        </div>
                     </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q6" id="q6b" value="resolver">
-
-                        <label class="form-check-label" for="q6b">
-
-                            Gosto de resolver problemas
-
-                        </label>
-
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8b" value="equipe">
+                            <label class="form-check-label" for="q8b">Em equipe</label>
+                        </div>
                     </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q6" id="q6c" value="ajudar">
-
-                        <label class="form-check-label" for="q6c">
-
-                            Gosto de ajudar outras pessoas
-
-                        </label>
-
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8c" value="pessoas">
+                            <label class="form-check-label" for="q8c">Atendendo pessoas</label>
+                        </div>
                     </div>
-
                 </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q6" id="q6d" value="explorar">
-
-                        <label class="form-check-label" for="q6d">
-
-                            Gosto de descobrir como as coisas funcionam
-
-                        </label>
-
-                    </div>
-
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar8" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima8" aria-label="Próxima pergunta" disabled>→</button>
                 </div>
-
             </div>
 
-
-            <div class="quiz-nav">
-
-                <button type="button" class="quiz-arrow quiz-back" id="btnVoltar6" aria-label="Voltar">
-
-                    ←
-
-                </button>
-
-
-                <button type="button" class="quiz-arrow quiz-next" id="btnProxima6" aria-label="Próxima pergunta"
-                    disabled>
-
-                    →
-
-                </button>
-
+            <!-- PERGUNTA 09 -->
+            <div class="quiz-question" id="pergunta9">
+                <h3>09. Qual área mais te interessa?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q9" id="q9a" value="programacao">
+                            <label class="form-check-label" for="q9a">Programação</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q9" id="q9b" value="design">
+                            <label class="form-check-label" for="q9b">Design e criação</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q9" id="q9c" value="redes">
+                            <label class="form-check-label" for="q9c">Redes e Internet</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q9" id="q9d" value="seguranca">
+                            <label class="form-check-label" for="q9d">Cibersegurança</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar9" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima9" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
             </div>
 
-        </div>
-
-
-        <!-- PERGUNTA 07-->
-
-        <div class="quiz-question" id="pergunta7">
-
-            <h3>
-                07. Se pudesse aprender uma coisa nova sobre tecnologia, o que escolheria?
-            </h3>
-
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q7" id="q7a" value="programacao">
-
-                        <label class="form-check-label" for="q7a">
-
-                            Aprender a programar
-
-                        </label>
-
+            <!-- PERGUNTA 10 -->
+            <div class="quiz-question" id="pergunta10">
+                <h3>10. O que mais te motiva a aprender?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q10" id="q10a" value="criar">
+                            <label class="form-check-label" for="q10a">Criar algo útil</label>
+                        </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q10" id="q10b" value="desafio">
+                            <label class="form-check-label" for="q10b">Superar desafios</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q10" id="q10c" value="descoberta">
+                            <label class="form-check-label" for="q10c">Entender como funciona</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q10" id="q10d" value="ajudar">
+                            <label class="form-check-label" for="q10d">Ajudar pessoas</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q10" id="q10e" value="melhorar">
+                            <label class="form-check-label" for="q10e">Melhorar algo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q10" id="q10f" value="curiosidade">
+                            <label class="form-check-label" for="q10f">Matar a curiosidade</label>
+                        </div>
+                    </div>
                 </div>
 
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q7" id="q7b" value="design">
-
-                        <label class="form-check-label" for="q7b">
-
-                            Criar designs e interfaces
-
-                        </label>
-
-                    </div>
-
+                <!-- NAVEGAÇÃO DA PERGUNTA 10 (Corrigida dentro da div da pergunta) -->
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar10" aria-label="Voltar">←</button>
+                    <button type="button" class="btn-resultado" id="btnVerPontuacao">Pontuação</button>
                 </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q7" id="q7c" value="redes">
-
-                        <label class="form-check-label" for="q7c">
-
-                            Montar e configurar redes
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q7" id="q7d" value="seguranca">
-
-                        <label class="form-check-label" for="q7d">
-
-                            Aprender sobre segurança digital
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q7" id="q7e" value="suporte">
-
-                        <label class="form-check-label" for="q7e">
-
-                            Aprender a configurar e solucionar problemas
-
-                        </label>
-
-                    </div>
-
-                </div>
-
             </div>
-
-
-            <div class="quiz-nav">
-
-                <button type="button" class="quiz-arrow quiz-back" id="btnVoltar7" aria-label="Voltar">
-
-                    ←
-
-                </button>
-
-
-                <button type="button" class="quiz-arrow quiz-next" id="btnProxima7" aria-label="Próxima pergunta"
-                    disabled>
-
-                    →
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!--    PERGUNTA 08 -->
-
-        <div class="quiz-question" id="pergunta8">
-
-            <h3>
-                08. Como você prefere trabalhar?
-            </h3>
-
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q8" id="q8a" value="sozinho">
-
-                        <label class="form-check-label" for="q8a">
-
-                            Sozinho(a), concentrado no meu trabalho
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q8" id="q8b" value="equipe">
-
-                        <label class="form-check-label" for="q8b">
-
-                            Em equipe, trocando ideias
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q8" id="q8c" value="pessoas">
-
-                        <label class="form-check-label" for="q8c">
-
-                            Ajudando e conversando com pessoas
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="quiz-nav">
-
-                <button type="button" class="quiz-arrow quiz-back" id="btnVoltar8" aria-label="Voltar">
-
-                    ←
-
-                </button>
-
-
-                <button type="button" class="quiz-arrow quiz-next" id="btnProxima8" aria-label="Próxima pergunta"
-                    disabled>
-
-                    →
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!--    PERGUNTA 09 -->
-
-        <div class="quiz-question" id="pergunta9">
-
-            <h3>
-                09. Qual dessas áreas mais desperta sua curiosidade?
-            </h3>
-
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q9" id="q9a" value="programacao">
-
-                        <label class="form-check-label" for="q9a">
-
-                            Programação
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q9" id="q9b" value="design">
-
-                        <label class="form-check-label" for="q9b">
-
-                            Design e criação
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q9" id="q9c" value="redes">
-
-                        <label class="form-check-label" for="q9c">
-
-                            Redes e Internet
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q9" id="q9d" value="seguranca">
-
-                        <label class="form-check-label" for="q9d">
-
-                            Cibersegurança
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="quiz-nav">
-
-                <button type="button" class="quiz-arrow quiz-back" id="btnVoltar9" aria-label="Voltar">
-
-                    ←
-
-                </button>
-
-
-                <button type="button" class="quiz-arrow quiz-next" id="btnProxima9" aria-label="Próxima pergunta"
-                    disabled>
-
-                    →
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!--    PERGUNTA 10  -->
-
-        <div class="quiz-question" id="pergunta10">
-
-            <h3>
-                10. O que mais te motiva quando aprende algo novo?
-            </h3>
-
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q10" id="q10a" value="criar">
-
-                        <label class="form-check-label" for="q10a">
-
-                            Criar algo que posso usar
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q10" id="q10b" value="desafio">
-
-                        <label class="form-check-label" for="q10b">
-
-                            Enfrentar um desafio
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q10" id="q10c" value="descoberta">
-
-                        <label class="form-check-label" for="q10c">
-
-                            Descobrir como algo funciona
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q10" id="q10d" value="ajudar">
-
-                        <label class="form-check-label" for="q10d">
-
-                            Poder ajudar alguém
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q10" id="q10e" value="melhorar">
-
-                        <label class="form-check-label" for="q10e">
-
-                            Melhorar algo que já existe
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="q10" id="q10f" value="curiosidade">
-
-                        <label class="form-check-label" for="q10f">
-
-                            Satisfazer minha curiosidade
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- NAVEGAÇÃO DA PERGUNTA 10 -->
-
-            <div class="quiz-nav">
-
-                <button type="button" class="quiz-arrow quiz-back" id="btnVoltar10" aria-label="Voltar">
-
-                    ←
-
-                </button>
-  
-                
-
-                <button type="button" class="btn-resultado" id="btnVerPontuacao">
-
-                    Pontuação
-
-                </button>
-
-            </div>
-
-        </div>
 
         </section>
 
-
-
-
+        <!-- TELA DE RESULTADO -->
         <section id="resultado" class="resultado-container" hidden>
-
         </section>
 
     </main>
 
+    <!-- BIBLIOTECAS EXTERNAS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
-
+    <!-- SCRIPTS DO PROJETO -->
+    <script src="./js/avatar.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/animacao.js"></script>
-    <script src="./js/avatar.js"></script>
     <script src="./js/contatos.js"></script>
 </body>
-
 </html>

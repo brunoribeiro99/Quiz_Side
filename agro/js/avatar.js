@@ -3,23 +3,23 @@ const avatarConfig = {
     areas: {
         agrotech: {
             nome: "AgroTech",
-            masculino: 40,
-            feminino: 40
+            masculino: 20,
+            feminino: 20
         },
         agroprod: {
             nome: "AgroProd",
-            masculino: 40,
-            feminino: 40
+            masculino: 20,
+            feminino: 20
         },
         agroeco: {
             nome: "AgroEco",
-            masculino: 40,
-            feminino: 40
+            masculino: 20,
+            feminino: 20
         },
         agrolab: {
             nome: "AgroLab",
-            masculino: 40,
-            feminino: 40
+            masculino: 20,
+            feminino: 20
         }
     }
 };

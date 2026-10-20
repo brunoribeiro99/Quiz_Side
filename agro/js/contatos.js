@@ -1,54 +1,52 @@
-let indiceContato = null;
+/* =========================================================
+   CONTATOS.JS — ENVIO DE DADOS PARA A PLANILHA (AGROSIDE)
+   ========================================================= */
 
-function salvarContatoInicial() {
-    const lista = JSON.parse(localStorage.getItem("contatosAgroSide")) || [];
+const ENDPOINT_PLANILHA = "https://api.sheetmonkey.io/form/8cBBsYzaLpR54UuK9HKCRL";
 
-    const contato = {
-        nome: document.getElementById("nome").value.trim(),
-        celular: document.getElementById("celular").value.trim(),
-        avatar: "",
-        data: new Date().toLocaleString("pt-BR")
-    };
+function enviarParaPlanilha(dados) {
+    // Identificador fixo para a planilha saber que veio do AgroSide
+    dados.Curso = "AgroSide";
 
-    if (indiceContato === null) {
-        // Primeira vez: acrescenta no final da lista
-        lista.push(contato);
-        indiceContato = lista.length - 1;
-    } else {
-        // Se a pessoa voltou e avançou de novo, atualiza o mesmo registro
-        lista[indiceContato] = contato;
-    }
-
-    localStorage.setItem("contatosAgroSide", JSON.stringify(lista));
+    fetch(ENDPOINT_PLANILHA, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(resposta => {
+        if (resposta.ok) {
+            console.log("✅ [AgroSide] Dados enviados para a planilha com sucesso!");
+        } else {
+            console.warn("⚠️ [AgroSide] Falha ao enviar para a planilha.");
+        }
+    })
+    .catch(erro => {
+        console.error("❌ [AgroSide] Erro na requisição:", erro);
+    });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const btnProximaDados = document.getElementById("btnProximaDados");
+/* =========================================================
+   RECOLHA E DISPARO DOS DADOS DO PARTICIPANTE
+   ========================================================= */
 
-    if (btnProximaDados) {
-        btnProximaDados.addEventListener("click", salvarContatoInicial);
-    }
-});
-document.addEventListener("DOMContentLoaded", function () {
-    const celular = document.getElementById("celular");
+function salvarDadosParticipante(areaVencedora, linkAvatar) {
+const generoSel = document.getElementById("generoReal")?.value || "";
+    const tomPeleSel = document.querySelector('input[name="tomPele"]:checked')?.value || "";
 
-    if (!celular) return;
+    const dadosParaSalvar = {
+        Nome: document.getElementById("nome")?.value.trim() || "",
+        Apelido: document.getElementById("nickname")?.value.trim() || "",
+        Celular: document.getElementById("celular")?.value.trim() || "",
+        Email: document.getElementById("email")?.value.trim() || "",
+        Idade: document.getElementById("idade")?.value.trim() || "",
+        Genero: generoSel,
+        TomPele: tomPeleSel,
+        Area: areaVencedora || "",
+        LinkAvatar: linkAvatar || "",
+        Data: new Date().toLocaleString("pt-BR")
+    };
 
-    celular.setAttribute("maxlength", "15");
-
-    celular.addEventListener("input", function () {
-        let n = celular.value.replace(/\D/g, "").slice(0, 11);
-
-        if (n.length > 10) {
-            n = n.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, "($1) $2-$3");
-        } else if (n.length > 6) {
-            n = n.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-        } else if (n.length > 2) {
-            n = n.replace(/^(\d{2})(\d{0,5}).*/, "($1) $2");
-        } else if (n.length > 0) {
-            n = n.replace(/^(\d{0,2}).*/, "($1");
-        }
-
-        celular.value = n;
-    });
-});
+    enviarParaPlanilha(dadosParaSalvar);
+}

@@ -690,21 +690,74 @@ function mostrarResultado() {
 
     // Injeta a estrutura encapsulada em duas colunas (resultado-grid)
     areaResultado.innerHTML = `
-        <div class="resultado-grid">
+        <div class="resultado-grid" id="fichaCompletaRPG">
 
-            <div class="resultado-coluna-esquerda">
-                <div
-                    class="avatar-card"
-                    id="avatarCard"
-                ></div>
+            <div class="resultado-coluna-esquerda" style="display: flex; flex-direction: column; align-items: center;">
+                
+                <!-- ÁREA DE CAPTURA: AVATAR COM SELOS (TOPO E RODAPÉ) -->
+                <div id="areaAvatarComSelo" style="display: flex; flex-direction: column; align-items: center; background: #0b0f19; padding: 14px; border-radius: 12px; border: 1.5px solid rgba(255, 204, 0, 0.35); gap: 10px; width: 100%; box-sizing: border-box;">
+                    
+                    <!-- SELO TOPO: ESTRELA AMARELA + ÍCONE DA CLASSE + MEU TALENTO -->
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 6px 14px; background: rgba(0, 0, 0, 0.75); border: 1.5px solid #ffcc00; border-radius: 20px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.3); width: fit-content;">
+                        <span style="font-size: 0.95rem; line-height: 1;">⭐</span>
+                        <img 
+                            src="${classes[vencedor].icone}" 
+                            alt="${classes[vencedor].nome}" 
+                            style="width: 18px; height: 18px; object-fit: contain; filter: drop-shadow(0 0 3px rgba(255, 204, 0, 0.5));"
+                        >
+                        <span style="font-size: 0.74rem; color: #ffcc00; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;">
+                            MEU TALENTO: ${classes[vencedor].nome}
+                        </span>
+                    </div>
 
+                    <div class="avatar-card" id="avatarCard"></div>
+                    
+                    <!-- SELO RODAPÉ: EVENTO -->
+                    <div style="padding: 5px 14px; background: rgba(0, 0, 0, 0.65); border: 1.5px solid #ffcc00; border-radius: 20px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.25);">
+                        <span style="font-size: 0.72rem; color: #ffcc00; font-weight: 700; letter-spacing: 0.8px;">✦ EU FUI NO SEJA FATEC • TI ✦</span>
+                    </div>
+                </div>
+
+                <!-- BOTÕES DE DOWNLOAD LADO A LADO (_ _) -->
+                <div style="display: flex; gap: 8px; width: 100%; max-width: 250px; margin-top: 14px;">
+                    <button
+                        type="button"
+                        class="btn-baixar-avatar"
+                        id="btnBaixarAvatarSelo"
+                        style="flex: 1; padding: 8px 6px; font-size: 0.78rem; cursor: pointer; text-align: center; border-radius: 6px; white-space: nowrap;"
+                    >
+                        ⬇ Avatar + Selo
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-baixar-avatar"
+                        id="btnBaixarFichaResumo"
+                        style="flex: 1; padding: 8px 6px; font-size: 0.78rem; cursor: pointer; text-align: center; border-radius: 6px; background: transparent; border: 1.5px solid #ffcc00; color: #ffcc00; white-space: nowrap;"
+                    >
+                        📜 Ficha Completa
+                    </button>
+                </div>
+
+                <!-- BOTÃO REFAZER / VOLTAR AO MENU PRINCIPAL -->
                 <button
                     type="button"
-                    class="btn-baixar-avatar"
-                    id="btnBaixarAvatar"
+                    id="btnVoltarInicio"
+                    style="margin-top: 8px; width: 100%; max-width: 250px; padding: 7px 10px; font-size: 0.75rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); color: #cccccc; border-radius: 6px; cursor: pointer; text-align: center; transition: all 0.2s ease;"
+                    onmouseover="this.style.borderColor='#ffcc00'; this.style.color='#ffcc00';"
+                    onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.color='#cccccc';"
+                    onclick="window.location.href='../index.html';"
                 >
-                    ⬇ Baixar minha imagem
+                    🔄 Refazer Quiz
                 </button>
+
+                <!-- CONTAINER DO QR CODE DINÂMICO (INICIA OCULTO) -->
+                <div id="blocoQrCodeDinamico" style="display: none; margin-top: 14px; flex-direction: column; align-items: center; gap: 6px;">
+                    <span id="qrLegenda" style="font-size: 0.72rem; color: #ffcc00; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
+                        📱 ESCANEIE PARA BAIXAR
+                    </span>
+                    <div id="qrcode" style="background: #ffffff; padding: 6px; border: 2px solid #ffcc00; box-shadow: 0 0 10px rgba(255, 204, 0, 0.35); border-radius: 8px; line-height: 0; display: inline-block;"></div>
+                </div>
             </div>
 
             <div class="resultado-coluna-direita">
@@ -737,7 +790,7 @@ function mostrarResultado() {
                     </p>
                 </div>
 
-                <div class="tabela-rpg">
+                <div class="tabela-rpg" id="blocoAtributosRPG">
                     <div class="tabela-rpg-titulo">
                         ⚔️ ATRIBUTOS DO PERSONAGEM
                     </div>
@@ -747,14 +800,156 @@ function mostrarResultado() {
 
         </div>
     `;
-}
+
+    // =========================================================
+    // 🚀 LÓGICA DE GERAÇÃO DO QR CODE COMPATÍVEL COM NETLIFY
+    // =========================================================
+    function atualizarQrCode(tipo) {
+        const bloco = document.getElementById("blocoQrCodeDinamico");
+        const containerQr = document.getElementById("qrcode");
+        const legenda = document.getElementById("qrLegenda");
+
+        if (!bloco || !containerQr || typeof QRCode === "undefined") return;
+
+        // Monta a URL pública limpa na Netlify com as variáveis necessárias
+        const urlBase = window.location.origin + window.location.pathname;
+        const linkNetlify = `${urlBase}?vencedor=${encodeURIComponent(vencedor)}&prog=${resultado.programacao}&des=${resultado.design}&red=${resultado.redes}&seg=${resultado.seguranca}&tipo=${tipo}`;
+
+        containerQr.innerHTML = "";
+        new QRCode(containerQr, {
+            text: linkNetlify,
+            width: 105,
+            height: 105,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+        });
+
+        if (legenda) {
+            legenda.innerText = (tipo === "avatar") 
+                ? "📱 ESCANEIE: AVATAR NO CELULAR" 
+                : "📱 ESCANEIE: FICHA NO CELULAR";
+        }
+
+        bloco.style.display = "flex";
+    }
+
+    // --- LÓGICA DE DOWNLOAD DOS BOTÕES ---
+
+    // 1. Download do Avatar com Selo + Ativação do QR Code
+    const btnAvatarSelo = document.getElementById("btnBaixarAvatarSelo");
+    if (btnAvatarSelo) {
+        btnAvatarSelo.addEventListener("click", function () {
+            const alvo = document.getElementById("areaAvatarComSelo");
+            if (!alvo || typeof html2canvas === "undefined") return;
+
+            btnAvatarSelo.innerText = "⏳ Gerando...";
+            html2canvas(alvo, { backgroundColor: "#0b0f19", scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+
+                // Download direto no computador
+                const link = document.createElement("a");
+                link.download = `Avatar_SejaFatec_${vencedor}.png`;
+                link.href = imgData;
+                link.click();
+
+                // Gera QR Code apontando para a página na Netlify
+                atualizarQrCode("avatar");
+
+                btnAvatarSelo.innerText = "⬇ Avatar + Selo";
+            }).catch(() => {
+                btnAvatarSelo.innerText = "⬇ Avatar + Selo";
+            });
+        });
+    }
+
+    // 2. Download da Ficha RPG Completa + Ativação do QR Code
+    const btnFichaResumo = document.getElementById("btnBaixarFichaResumo");
+    if (btnFichaResumo) {
+        btnFichaResumo.addEventListener("click", function () {
+            const avatarSelo = document.getElementById("areaAvatarComSelo");
+            const atributos = document.getElementById("blocoAtributosRPG");
+            if (!avatarSelo || !atributos || typeof html2canvas === "undefined") return;
+
+            btnFichaResumo.innerText = "⏳ Gerando...";
+
+            // Cria um container temporário para a ficha completa
+            const cardExport = document.createElement("div");
+            cardExport.style.cssText = `
+                position: fixed;
+                left: -9999px;
+                top: 0;
+                width: 420px;
+                background: #0b0f19;
+                padding: 20px;
+                border-radius: 16px;
+                border: 2px solid #ffcc00;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+                box-sizing: border-box;
+            `;
+
+            cardExport.appendChild(avatarSelo.cloneNode(true));
+            cardExport.appendChild(atributos.cloneNode(true));
+            document.body.appendChild(cardExport);
+
+            html2canvas(cardExport, { backgroundColor: "#0b0f19", scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+
+                // Download direto no computador
+                const link = document.createElement("a");
+                link.download = `Ficha_RPG_${vencedor}.png`;
+                link.href = imgData;
+                link.click();
+
+                document.body.removeChild(cardExport);
+
+                // Gera QR Code apontando para a página na Netlify
+                atualizarQrCode("ficha");
+
+                btnFichaResumo.innerText = "📜 Ficha Completa";
+            }).catch(() => {
+                if (document.body.contains(cardExport)) document.body.removeChild(cardExport);
+                btnFichaResumo.innerText = "📜 Ficha Completa";
+            });
+        });
+    }
+} // <--- FECHA A FUNÇÃO mostrarResultado()
 
 
 // ========================================
-// 🏆 BOTÃO "VER MINHA PONTUAÇÃO"
+// 🏆 BOTÃO "VER MINHA PONTUAÇÃO" & LEITURA DE URL
 // ========================================
 
 document.addEventListener("DOMContentLoaded", function () {
+    // 1. VERIFICA SE A PÁGINA FOI ABERTA VIA QR CODE NO CELULAR COM PARÂMETROS
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("vencedor")) {
+        const v = urlParams.get("vencedor");
+        resultado.programacao = parseInt(urlParams.get("prog")) || 0;
+        resultado.design = parseInt(urlParams.get("des")) || 0;
+        resultado.redes = parseInt(urlParams.get("red")) || 0;
+        resultado.seguranca = parseInt(urlParams.get("seg")) || 0;
+
+        const quiz = document.getElementById("quiz");
+        const perguntaDados = document.getElementById("perguntaDados");
+        const resultadoArea = document.getElementById("resultado");
+
+        if (quiz) quiz.style.display = "none";
+        if (perguntaDados) perguntaDados.style.display = "none";
+
+        if (resultadoArea) {
+            resultadoArea.removeAttribute("hidden");
+            resultadoArea.style.display = "block";
+        }
+
+        mostrarResultado();
+        return; // Pula o resto pois a tela já é de resultado
+    }
+
+    // 2. BOTÃO DO QUIZ NORMAL
     const btnVerPontuacao = document.getElementById("btnVerPontuacao");
     const quiz = document.getElementById("quiz");
     const resultadoArea = document.getElementById("resultado");

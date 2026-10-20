@@ -1,5 +1,5 @@
 /* =========================================================
-   PIXELU — CONTROLE DO QUIZ
+   PIXELU — CONTROLE DO QUIZ (DEVSIDE)
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -106,12 +106,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const idade =
             document.getElementById("idade");
 
+        const generoReal =
+            document.getElementById("generoReal");
 
-        const genero =
+        const generoAvatar =
             document.querySelector(
                 'input[name="genero"]:checked'
             );
-
 
         const tomPele =
             document.querySelector(
@@ -172,11 +173,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =================================================
-           VERIFICA GÊNERO
+           VERIFICA GÊNERO REAL (DROPDOWN)
            ================================================= */
 
-        const generoValido =
-            !!genero;
+        const generoRealValido =
+            generoReal &&
+            generoReal.value !== "";
+
+
+        /* =================================================
+           VERIFICA GÊNERO DO PERSONAGEM (BOTÕES)
+           ================================================= */
+
+        const generoAvatarValido =
+            !!generoAvatar;
 
 
         /* =================================================
@@ -197,7 +207,8 @@ document.addEventListener("DOMContentLoaded", function () {
             celularValido &&
             emailValido &&
             idadeValida &&
-            generoValido &&
+            generoRealValido &&
+            generoAvatarValido &&
             tomPeleValido
         );
     }
@@ -212,17 +223,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const pergunta =
             document.getElementById(`pergunta${numero}`);
 
-
         if (!pergunta) {
             return false;
         }
-
 
         const respostas =
             pergunta.querySelectorAll(
                 'input[type="radio"], input[type="checkbox"]'
             );
-
 
         return Array.from(respostas).some(
             resposta => resposta.checked
@@ -258,13 +266,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     "btnProximaDados"
                 );
 
-
             if (proxima) {
-
                 proxima.disabled =
                     !dadosPreenchidos();
             }
-
 
             return;
         }
@@ -278,9 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     `btnProxima${etapaAtual}`
                 );
 
-
             if (proxima) {
-
                 proxima.disabled =
                     !perguntaRespondida(etapaAtual);
             }
@@ -295,12 +298,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     "btnVerPontuacao"
                 );
 
-
             if (btnVerPontuacao) {
 
                 btnVerPontuacao.disabled =
                     !perguntaRespondida(totalPerguntas);
-
 
                 btnVerPontuacao.style.opacity =
                     perguntaRespondida(totalPerguntas)
@@ -321,14 +322,10 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         if (etapaAtual === totalPerguntas) {
-
             finalizarQuiz();
-
             return;
         }
-
 
         mostrarEtapa(etapaAtual + 1);
     }
@@ -344,7 +341,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         mostrarEtapa(etapaAtual - 1);
     }
 
@@ -353,83 +349,57 @@ document.addEventListener("DOMContentLoaded", function () {
        FINALIZAR QUIZ
        ===================================================== */
 
-    /* =====================================================
-   FINALIZAR QUIZ E ENVIAR DADOS
-   ===================================================== */
+    function finalizarQuiz() {
+        // 1. Descobre a área vencedora (calculada no script.js)
+        const vencedor = (typeof descobrirVencedor === "function") 
+            ? descobrirVencedor() 
+            : "programacao";
 
-const ENDPOINT_PLANILHA = "https://api.sheetmonkey.io/form/8cBBsYzaLpR54UuK9HKCRL";
-
-function enviarParaPlanilha(dados) {
-    fetch(ENDPOINT_PLANILHA, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dados)
-    })
-    .then(resposta => {
-        if (resposta.ok) {
-            console.log("✅ Dados enviados para o Google Sheets com sucesso!");
-        } else {
-            console.warn("⚠️ Ocorreu um problema ao enviar para a planilha.");
+        // 2. Cria e exibe o avatar (função do avatar.js)
+        let avatar = null;
+        if (typeof criarAvatar === "function") {
+            avatar = criarAvatar(vencedor);
         }
-    })
-    .catch(erro => {
-        console.error("❌ Erro de comunicação com o SheetMonkey:", erro);
-    });
-}
 
-function finalizarQuiz() {
-    // 1. Descobre a área vencedora (calculada no script.js)
-    const vencedor = (typeof descobrirVencedor === "function") 
-        ? descobrirVencedor() 
-        : "programacao";
+        // 3. Dispara o salvamento dos dados (função do contatos.js)
+        if (typeof salvarDadosParticipante === "function") {
+            const link = avatar ? new URL(avatar.imagem, window.location.href).href : "";
+            salvarDadosParticipante(vencedor, link);
 
-    // 2. Cria e exibe o avatar (função do avatar.js)
-    let avatar = null;
-    if (typeof criarAvatar === "function") {
-        avatar = criarAvatar(vencedor);
+            // GERA O QR CODE NA TELA
+            const containerQr = document.getElementById("qrcode");
+            if (containerQr && link && typeof QRCode !== "undefined") {
+                containerQr.innerHTML = ""; // Limpa caso já exista algum
+                new QRCode(containerQr, {
+                    text: link,
+                    width: 140,
+                    height: 140,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+            }
+        }
+
+        // 4. Esconde o quiz e mostra a seção de resultado
+        const secaoQuiz = document.getElementById("quiz");
+        const secaoDados = document.getElementById("perguntaDados");
+        const secaoResultado = document.getElementById("resultado");
+
+        if (secaoQuiz) secaoQuiz.style.display = "none";
+        if (secaoDados) secaoDados.style.display = "none";
+
+        if (secaoResultado) {
+            secaoResultado.removeAttribute("hidden");
+            secaoResultado.style.display = "block";
+        }
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
-    // 3. Coleta os dados para a planilha da coordenação
-    const generoSel = document.querySelector('input[name="genero"]:checked')?.value || "";
-    const tomPeleSel = document.querySelector('input[name="tomPele"]:checked')?.value || "";
-
-    const dadosParaSalvar = {
-        Nome: document.getElementById("nome")?.value.trim() || "",
-        Apelido: document.getElementById("nickname")?.value.trim() || "",
-        Celular: document.getElementById("celular")?.value.trim() || "",
-        Email: document.getElementById("email")?.value.trim() || "",
-        Idade: document.getElementById("idade")?.value.trim() || "",
-        Genero: generoSel,
-        TomPele: tomPeleSel,
-        Area: vencedor,
-        LinkAvatar: avatar ? (window.location.origin + "/" + avatar.imagem) : "",
-        Data: new Date().toLocaleString("pt-BR")
-    };
-
-    // 4. Envia para o SheetMonkey
-    enviarParaPlanilha(dadosParaSalvar);
-
-    // 5. Esconde o quiz e mostra a seção de resultado
-    const secaoQuiz = document.getElementById("quiz");
-    const secaoDados = document.getElementById("perguntaDados");
-    const secaoResultado = document.getElementById("resultado");
-
-    if (secaoQuiz) secaoQuiz.style.display = "none";
-    if (secaoDados) secaoDados.style.display = "none";
-
-    if (secaoResultado) {
-        secaoResultado.removeAttribute("hidden");
-        secaoResultado.style.display = "block";
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
 
 
     /* =====================================================
-       REGISTRO DE EVENTOS
+       REGISTRO DE ELEMENTOS
        ===================================================== */
 
     const nome =
@@ -447,12 +417,13 @@ function finalizarQuiz() {
     const idade =
         document.getElementById("idade");
 
+    const generoReal =
+        document.getElementById("generoReal");
 
     const generos =
         document.querySelectorAll(
             'input[name="genero"]'
         );
-
 
     const tonsPele =
         document.querySelectorAll(
@@ -461,33 +432,57 @@ function finalizarQuiz() {
 
 
     /* =====================================================
-       CAMPOS DE TEXTO
+       CAMPOS DE TEXTO (COM FORMATAÇÃO EM TEMPO REAL)
        ===================================================== */
 
+    /* Nome: Primeira letra de cada palavra em maiúscula */
     if (nome) {
 
-        nome.addEventListener(
-            "input",
-            atualizarBotoes
-        );
+        nome.addEventListener("input", function (e) {
+            const pos = e.target.selectionStart;
+            e.target.value = e.target.value.replace(/(?:^|\s)\S/g, function (a) {
+                return a.toUpperCase();
+            });
+            e.target.setSelectionRange(pos, pos);
+            atualizarBotoes();
+        });
     }
 
 
+    /* Nickname: Primeira letra maiúscula */
     if (nickname) {
 
-        nickname.addEventListener(
-            "input",
-            atualizarBotoes
-        );
+        nickname.addEventListener("input", function (e) {
+            const pos = e.target.selectionStart;
+            if (e.target.value.length > 0) {
+                e.target.value = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+            }
+            e.target.setSelectionRange(pos, pos);
+            atualizarBotoes();
+        });
     }
 
 
+    /* Celular: Máscara (XX) XXXXX-XXXX */
     if (celular) {
 
-        celular.addEventListener(
-            "input",
-            atualizarBotoes
-        );
+        celular.addEventListener("input", function (e) {
+            let valor = e.target.value.replace(/\D/g, "");
+            valor = valor.substring(0, 11);
+
+            if (valor.length > 10) {
+                valor = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+            } else if (valor.length > 6) {
+                valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
+            } else if (valor.length > 2) {
+                valor = valor.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
+            } else if (valor.length > 0) {
+                valor = valor.replace(/^(\d{0,2})$/, "($1");
+            }
+
+            e.target.value = valor;
+            atualizarBotoes();
+        });
     }
 
 
@@ -504,6 +499,14 @@ function finalizarQuiz() {
 
         idade.addEventListener(
             "input",
+            atualizarBotoes
+        );
+    }
+
+    if (generoReal) {
+
+        generoReal.addEventListener(
+            "change",
             atualizarBotoes
         );
     }
@@ -577,9 +580,20 @@ function finalizarQuiz() {
         });
     }
 
+    if (generoReal) {
+
+        generoReal.addEventListener("blur", function () {
+
+            const valido =
+                generoReal.value !== "";
+
+            marcarCampo(generoReal, valido);
+        });
+    }
+
 
     /* =====================================================
-       GÊNERO
+       GÊNERO DO AVATAR
        ===================================================== */
 
     generos.forEach(genero => {

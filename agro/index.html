@@ -113,26 +113,24 @@
                     </div>
 
                     <!-- TOM DE PELE -->
-                    <div class="mt-4 mb-2">
-                        <label class="form-label text-center d-block mb-2">Tom de Pele do Avatar</label>
-                        <div class="tom-pele-container">
-                            <label class="tom-pele-card">
-                                <input type="radio" name="tomPele" value="clara" required>
-                                <div class="tom-pele-box skin-clara">
-                                    <span class="tom-pele-brilho"></span>
-                                </div>
-                                <span class="tom-pele-nome">Pele Clara</span>
-                            </label>
+<div class="mt-4 mb-2">
+    <label class="form-label text-center d-block mb-2">Tom de Pele do Avatar</label>
+    <div class="tom-pele-container">
+        <label class="tom-pele-card">
+            <input type="radio" name="tomPele" value="clara" required aria-label="Tom de pele 1">
+            <div class="tom-pele-box skin-clara">
+                <span class="tom-pele-brilho"></span>
+            </div>
+        </label>
 
-                            <label class="tom-pele-card">
-                                <input type="radio" name="tomPele" value="escura">
-                                <div class="tom-pele-box skin-escura">
-                                    <span class="tom-pele-brilho"></span>
-                                </div>
-                                <span class="tom-pele-nome">Pele Escura</span>
-                            </label>
-                        </div>
-                    </div>
+        <label class="tom-pele-card">
+            <input type="radio" name="tomPele" value="escura" aria-label="Tom de pele 2">
+            <div class="tom-pele-box skin-escura">
+                <span class="tom-pele-brilho"></span>
+            </div>
+        </label>
+    </div>
+</div>
 
                     <!-- NAVEGAÇÃO -->
                     <div class="quiz-nav justify-content-center">
@@ -541,12 +539,17 @@
 
     </main>
 
-    <!-- SCRIPTS -->
+    <!-- BIBLIOTECAS EXTERNAS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- SCRIPTS DA APLICAÇÃO -->
+    <script src="./js/avatar.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/animacao.js"></script>
-    <script src="./js/avatar.js"></script>
     <script src="./js/contatos.js"></script>
+</body>
 </body>
 
 </html>
