@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestSide - Quiz</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS do GestSide -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <main class="container py-5">
+
+        <!-- TÍTULO -->
+        <div class="text-center mb-5">
+            <h1>Bem-vindo ao GestSide!</h1>
+            <p>Descubra o seu perfil no universo da gestão, liderança e negócios.</p>
+        </div>
+
+        <section class="quiz-section" id="quiz">
+
+            <!-- ETAPA 0: DADOS PESSOAIS -->
+            <div id="perguntaDados" class="quiz-question">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">Seus Dados de Aventureiro</h2>
+
+                        <div class="row g-3" id="pessoais">
+                            <!-- Nome Completo -->
+                            <div class="col-12">
+                                <label for="nome" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome completo" required>
+                            </div>
+
+                            <!-- Nickname + Gênero -->
+                            <div class="col-12 col-md-7">
+                                <label for="nickname" class="form-label">Apelido / Nome Social</label>
+                                <input type="text" class="form-control" id="nickname" placeholder="Como quer ser chamado" required>
+                            </div>
+
+                            <div class="col-12 col-md-5">
+                                <label for="generoReal" class="form-label">Gênero</label>
+                                <select class="form-select" id="generoReal" required>
+                                    <option value="" selected disabled>Selecione</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Não-binário">Não-binário</option>
+                                    <option value="Transgênero">Transgênero</option>
+                                    <option value="Outro">Outro</option>
+                                    <option value="Prefiro não informar">Prefiro não informar</option>
+                                </select>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-12">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com" required>
+                            </div>
+
+                            <!-- Idade + Celular -->
+                            <div class="col-5 col-md-4">
+                                <label for="idade" class="form-label">Idade</label>
+                                <input type="number" class="form-control" id="idade" placeholder="Ex: 17" min="10" max="99" required>
+                            </div>
+
+                            <div class="col-7 col-md-8">
+                                <label for="celular" class="form-label">Celular / WhatsApp</label>
+                                <input type="tel" class="form-control" id="celular" placeholder="(17) 4002-8922" maxlength="15" required>
+                            </div>
+                        </div>
+
+                        <!-- GÊNERO / IDENTIDADE DO AVATAR -->
+                        <div class="mt-4 mb-4">
+                            <label class="form-label text-center d-block mb-3">Qual é o genero do seu personagem?</label>
+                            <div class="row g-2 justify-content-center">
+                                <div class="col-4 col-md-3">
+                                    <input type="radio" class="btn-check" name="genero" id="generoMasculino" value="masculino" autocomplete="off">
+                                    <label class="btn btn-genero-masculino w-100 py-3 text-center" for="generoMasculino">
+                                        <img src="img/icon/masculino.png" alt="Masculino" class="icone-genero"><br>Masc
+                                    </label>
+                                </div>
+
+                                <div class="col-4 col-md-3">
+                                    <input type="radio" class="btn-check" name="genero" id="generoFeminino" value="feminino" autocomplete="off">
+                                    <label class="btn btn-genero-feminino w-100 py-3 text-center" for="generoFeminino">
+                                        <img src="img/icon/feminino.png" alt="Feminino" class="icone-genero"><br>Fem
+                                    </label>
+                                </div>
+
+                                <div class="col-4 col-md-3">
+                                    <input type="radio" class="btn-check" name="genero" id="generoTrans" value="trans" autocomplete="off">
+                                    <label class="btn btn-genero-trans w-100 py-3 text-center" for="generoTrans">
+                                        <img src="img/icon/transgenero.png" alt="Trans" class="icone-genero"><br>Não quero informar
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TOM DE PELE -->
+                        <div class="mt-4 mb-2">
+                            <label class="form-label text-center d-block mb-2">Tom de Pele do Avatar</label>
+                            <div class="tom-pele-container">
+                                <label class="tom-pele-card">
+                                    <input type="radio" name="tomPele" value="clara" required aria-label="Tom de pele 1">
+                                    <div class="tom-pele-box skin-clara"><span class="tom-pele-brilho"></span></div>
+                                </label>
+
+                                <label class="tom-pele-card">
+                                    <input type="radio" name="tomPele" value="escura" aria-label="Tom de pele 2">
+                                    <div class="tom-pele-box skin-escura"><span class="tom-pele-brilho"></span></div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- NAVEGAÇÃO DADOS -->
+                        <div class="quiz-nav justify-content-center">
+                            <button type="button" class="quiz-arrow quiz-next" id="btnProximaDados" aria-label="Próxima pergunta" disabled>→</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 01 -->
+            <div class="quiz-question" id="pergunta1">
+                <h3>01. Se você pudesse assumir uma missão em uma empresa, qual escolheria?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1a" value="gestor">
+                            <label class="form-check-label" for="q1a">Liderar uma equipe rumo a grandes resultados</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1b" value="empreendedor">
+                            <label class="form-check-label" for="q1b">Criar um negócio que ainda não existe</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1c" value="marketing">
+                            <label class="form-check-label" for="q1c">Lançar uma marca que conquiste o mercado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1d" value="pessoas">
+                            <label class="form-check-label" for="q1d">Tornar o ambiente de trabalho melhor para todos</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1e" value="financas">
+                            <label class="form-check-label" for="q1e">Descobrir como aumentar os lucros da empresa</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar1" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima1" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 02 -->
+            <div class="quiz-question" id="pergunta2">
+                <h3>02. Uma empresa está perdendo clientes. Qual seria sua primeira atitude?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2a" value="gestor">
+                            <label class="form-check-label" for="q2a">Reunir a equipe e definir um plano de ação</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2b" value="empreendedor">
+                            <label class="form-check-label" for="q2b">Criar uma solução diferente da concorrência</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2c" value="marketing">
+                            <label class="form-check-label" for="q2c">Investigar o comportamento dos consumidores</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2d" value="pessoas">
+                            <label class="form-check-label" for="q2d">Ouvir os funcionários e melhorar o atendimento</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2e" value="financas">
+                            <label class="form-check-label" for="q2e">Analisar dados de vendas e satisfação</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar2" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima2" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 03 -->
+            <div class="quiz-question" id="pergunta3">
+                <h3>03. Em uma feira de empreendedorismo, o que mais chama sua atenção?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3a" value="gestor">
+                            <label class="form-check-label" for="q3a">Como os negócios são administrados</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3b" value="empreendedor">
+                            <label class="form-check-label" for="q3b">As startups e as ideias inovadoras</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3c" value="marketing">
+                            <label class="form-check-label" for="q3c">As campanhas e estratégias de divulgação</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3d" value="pessoas">
+                            <label class="form-check-label" for="q3d">As histórias e experiências dos empreendedores</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3e" value="financas">
+                            <label class="form-check-label" for="q3e">Os números e os resultados financeiros</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar3" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima3" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 04 -->
+            <div class="quiz-question" id="pergunta4">
+                <h3>04. Se recebesse R$ 10 mil para desenvolver um projeto, o que faria?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4a" value="gestor">
+                            <label class="form-check-label" for="q4a">Organizaria uma equipe e um planejamento</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4b" value="empreendedor">
+                            <label class="form-check-label" for="q4b">Investiria em uma ideia de negócio</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4c" value="marketing">
+                            <label class="form-check-label" for="q4c">Criaria uma campanha para vender um produto</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4d" value="pessoas">
+                            <label class="form-check-label" for="q4d">Desenvolveria um projeto para capacitar pessoas</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4e" value="financas">
+                            <label class="form-check-label" for="q4e">Estudaria custos, riscos e retorno financeiro</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar4" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima4" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 05 -->
+            <div class="quiz-question" id="pergunta5">
+                <h3>05. Qual superpoder profissional você gostaria de ter?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5a" value="gestor">
+                            <label class="form-check-label" for="q5a">Tomar decisões difíceis com confiança</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5b" value="empreendedor">
+                            <label class="form-check-label" for="q5b">Transformar qualquer ideia em inovação</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5c" value="marketing">
+                            <label class="form-check-label" for="q5c">Entender exatamente o que os clientes desejam</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5d" value="pessoas">
+                            <label class="form-check-label" for="q5d">Motivar e unir qualquer equipe</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5e" value="financas">
+                            <label class="form-check-label" for="q5e">Prever tendências usando dados</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar5" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima5" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 06 -->
+            <div class="quiz-question" id="pergunta6">
+                <h3>06. Em um trabalho em grupo, qual papel combina mais com você?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6a" value="gestor">
+                            <label class="form-check-label" for="q6a">Coordenar as atividades e os prazos</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6b" value="empreendedor">
+                            <label class="form-check-label" for="q6b">Propor ideias criativas e diferentes</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6c" value="marketing">
+                            <label class="form-check-label" for="q6c">Apresentar e divulgar o projeto</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6d" value="pessoas">
+                            <label class="form-check-label" for="q6d">Mediar conflitos e apoiar os colegas</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6e" value="financas">
+                            <label class="form-check-label" for="q6e">Organizar informações e avaliar resultados</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar6" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima6" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 07 -->
+            <div class="quiz-question" id="pergunta7">
+                <h3>07. Qual desafio empresarial você gostaria de resolver?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7a" value="gestor">
+                            <label class="form-check-label" for="q7a">Fazer uma empresa crescer de forma organizada</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7b" value="empreendedor">
+                            <label class="form-check-label" for="q7b">Criar um produto que revolucione o mercado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7c" value="marketing">
+                            <label class="form-check-label" for="q7c">Tornar uma marca conhecida nacionalmente</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7d" value="pessoas">
+                            <label class="form-check-label" for="q7d">Diminuir a rotatividade de funcionários</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7e" value="financas">
+                            <label class="form-check-label" for="q7e">Reduzir desperdícios e melhorar a rentabilidade</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar7" aria-label="Voltar">←</button>
+                    <button type="button" class="quiz-arrow quiz-next" id="btnProxima7" aria-label="Próxima pergunta" disabled>→</button>
+                </div>
+            </div>
+
+            <!-- PERGUNTA 08 -->
+            <div class="quiz-question" id="pergunta8">
+                <h3>08. Como você imagina seu futuro profissional?</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8a" value="gestor">
+                            <label class="form-check-label" for="q8a">Dirigindo uma grande organização</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8b" value="empreendedor">
+                            <label class="form-check-label" for="q8b">Sendo dono do próprio negócio</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8c" value="marketing">
+                            <label class="form-check-label" for="q8c">Trabalhando com marcas e estratégias digitais</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8d" value="pessoas">
+                            <label class="form-check-label" for="q8d">Liderando o desenvolvimento de talentos</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8e" value="financas">
+                            <label class="form-check-label" for="q8e">Tomando decisões com dados e indicadores</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NAVEGAÇÃO DA PERGUNTA 8 (ÚLTIMA) -->
+                <div class="quiz-nav">
+                    <button type="button" class="quiz-arrow quiz-back" id="btnVoltar8" aria-label="Voltar">←</button>
+                    <button type="button" class="btn-resultado" id="btnVerPontuacao">Pontuação</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TELA DE RESULTADO -->
+        <section id="resultado" class="resultado-container" hidden>
+        </section>
+
+        <!-- RODAPÉ -->
+        <footer class="footer">
+            <div class="footer-badge">FATEC Jales • Quiz Vocacional</div>
+            <p class="footer-course">5º Semestre • Sistemas para Internet</p>
+            <div class="footer-divider"></div>
+            <p class="footer-authors">
+                <span>Desenvolvido por</span>
+                <strong>Bruno Ribeiro</strong> • 
+                <strong>Hugo Matos</strong> • 
+                <strong>Victor Freitas</strong> • 
+                <strong>Haru Moraes</strong>
+            </p>
+        </footer>
+    </main>
+
+    <!-- BIBLIOTECAS EXTERNAS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- SCRIPTS DO PROJETO -->
+    <script src="./js/avatar.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/animacao.js"></script>
+    <script src="./js/contatos.js"></script>
+</body>
+</html>

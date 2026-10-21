@@ -16,6 +16,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const dadosPessoais =
         document.getElementById("perguntaDados");
 
+    const footer =
+        document.querySelector(".footer");
+
+
+    /* =====================================================
+       RODAPÉ: SÓ APARECE NA TELA DE DADOS (ETAPA 0)
+       ===================================================== */
+
+    function atualizarFooter(etapa) {
+        if (footer) {
+            footer.style.display = (etapa === 0) ? "" : "none";
+        }
+    }
+
 
     /* =====================================================
        MOSTRAR ETAPA
@@ -43,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         etapaAtual = etapa;
 
+        atualizarFooter(etapa);
         atualizarBotoes();
 
         /* Rola a página suavemente para o topo */
@@ -120,28 +135,19 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        /* =================================================
-           VERIFICA NOME
-           ================================================= */
-
+        /* VERIFICA NOME */
         const nomeValido =
             nome &&
             nome.value.trim().length > 8;
 
 
-        /* =================================================
-           VERIFICA NICKNAME
-           ================================================= */
-
+        /* VERIFICA NICKNAME */
         const nicknameValido =
             !nickname ||
             nickname.value.trim().length > 0;
 
 
-        /* =================================================
-           VERIFICA CELULAR
-           ================================================= */
-
+        /* VERIFICA CELULAR */
         const celularNumeros =
             celular
                 ? celular.value.replace(/\D/g, "")
@@ -152,10 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
             celularNumeros.length >= 10;
 
 
-        /* =================================================
-           VERIFICA E-MAIL
-           ================================================= */
-
+        /* VERIFICA E-MAIL */
         const emailValido =
             email &&
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
@@ -163,44 +166,29 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        /* =================================================
-           VERIFICA IDADE
-           ================================================= */
-
+        /* VERIFICA IDADE */
         const idadeValida =
             idade &&
             idade.value.trim() !== "";
 
 
-        /* =================================================
-           VERIFICA GÊNERO REAL (DROPDOWN)
-           ================================================= */
-
+        /* VERIFICA GÊNERO REAL (DROPDOWN) */
         const generoRealValido =
             generoReal &&
             generoReal.value !== "";
 
 
-        /* =================================================
-           VERIFICA GÊNERO DO PERSONAGEM (BOTÕES)
-           ================================================= */
-
+        /* VERIFICA GÊNERO DO PERSONAGEM (BOTÕES) */
         const generoAvatarValido =
             !!generoAvatar;
 
 
-        /* =================================================
-           VERIFICA TOM DE PELE
-           ================================================= */
-
+        /* VERIFICA TOM DE PELE */
         const tomPeleValido =
             !!tomPele;
 
 
-        /* =================================================
-           RETORNA SE TUDO ESTÁ CORRETO
-           ================================================= */
-
+        /* RETORNA SE TUDO ESTÁ CORRETO */
         return (
             nomeValido &&
             nicknameValido &&
@@ -290,7 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Pergunta 10 */
+        /* Pergunta 10 (última) */
         else if (etapaAtual === totalPerguntas) {
 
             const btnVerPontuacao =
@@ -351,8 +339,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function finalizarQuiz() {
         // 1. Descobre a área vencedora (calculada no script.js)
-        const vencedor = (typeof descobrirVencedor === "function") 
-            ? descobrirVencedor() 
+        const vencedor = (typeof descobrirVencedor === "function")
+            ? descobrirVencedor()
             : "programacao";
 
         // 2. Cria e exibe o avatar (função do avatar.js)
@@ -381,13 +369,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        // 4. Esconde o quiz e mostra a seção de resultado
+        // 4. Esconde o quiz, o rodapé e mostra a seção de resultado
         const secaoQuiz = document.getElementById("quiz");
         const secaoDados = document.getElementById("perguntaDados");
         const secaoResultado = document.getElementById("resultado");
 
         if (secaoQuiz) secaoQuiz.style.display = "none";
         if (secaoDados) secaoDados.style.display = "none";
+        atualizarFooter(-1);
 
         if (secaoResultado) {
             secaoResultado.removeAttribute("hidden");
@@ -732,6 +721,15 @@ document.addEventListener("DOMContentLoaded", function () {
        INICIALIZAÇÃO DO APP
        ===================================================== */
 
-    mostrarEtapa(0);
+    /* Se abriu pelo QR Code (link com ?vencedor=...), o script.js já
+       mostrou o resultado: só garante que o rodapé fique escondido. */
+    const abriuPeloQr =
+        new URLSearchParams(window.location.search).has("vencedor");
+
+    if (abriuPeloQr) {
+        atualizarFooter(-1);
+    } else {
+        mostrarEtapa(0);
+    }
 
 });

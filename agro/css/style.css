@@ -29,7 +29,9 @@
    RESET / BASE
    ========================================================= */
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -293,6 +295,16 @@ main > .text-center:first-child .lead {
     row-gap: 20px;
 }
 
+/* ESCONDE O RADIO NATIVO (ELIMINA O PONTO AZUL) */
+input[type="radio"]#generoMasculino,
+input[type="radio"]#generoFeminino,
+input[type="radio"]#generoTrans {
+    display: none !important;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* =========================================================
    CUSTOMIZAÇÃO DE GÊNERO / IDENTIDADE
    ========================================================= */
@@ -306,14 +318,25 @@ main > .text-center:first-child .lead {
     transition: all 0.2s ease-in-out;
     border-radius: 8px;
     cursor: pointer;
+    min-height: 110px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px 8px;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 
 .icone-genero {
-    width: 45px;
-    height: 45px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
     display: inline-block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .btn-genero-masculino:hover,
@@ -471,28 +494,16 @@ input[type="radio"]#generoTrans:checked + .btn-genero-trans {
     position: relative;
     width: 100%;
     min-height: 68px;
-
     display: flex;
     align-items: center;
-
     margin: 0 !important;
     padding: 0 !important;
-
     color: #cbd5e1;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111a14,
-            #0b120e
-        );
-
+    background: linear-gradient(145deg, #111a14, #0b120e);
     border: 1px solid var(--panel-line);
     border-radius: 6px;
-
     cursor: pointer;
     overflow: hidden;
-
     transition:
         border-color .18s ease,
         background .18s ease,
@@ -513,12 +524,7 @@ input[type="radio"]#generoTrans:checked + .btn-genero-trans {
 
 .form-check:hover {
     color: var(--ink);
-    background:
-        linear-gradient(
-            145deg,
-            #15241b,
-            #0e1812
-        );
+    background: linear-gradient(145deg, #15241b, #0e1812);
     border-color: rgba(74, 222, 128, .5);
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(0, 0, 0, .25), 0 0 15px rgba(34, 197, 94, .1);
@@ -615,25 +621,28 @@ input[type="radio"]#generoTrans:checked + .btn-genero-trans {
 }
 
 /* =========================================================
-   NAVEGAÇÃO DO QUIZ (SETAS)
+   NAVEGAÇÃO DO QUIZ (SETAS E PONTUAÇÃO)
    ========================================================= */
 
 .quiz-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     margin-top: 35px;
     width: 100%;
+    max-width: 100%;
 }
 
 .quiz-arrow {
     position: relative;
-    width: 85px;
+    width: 75px;
+    min-width: 65px;
     height: 48px;
     border: 1px solid var(--panel-line);
     background: var(--panel-dark);
     color: var(--agro-light);
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -641,6 +650,7 @@ input[type="radio"]#generoTrans:checked + .btn-genero-trans {
     cursor: pointer;
     transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    flex-shrink: 0;
 }
 
 .quiz-next {
@@ -666,37 +676,20 @@ input[type="radio"]#generoTrans:checked + .btn-genero-trans {
     filter: grayscale(0.5);
 }
 
-/* Botão Ver Pontuação (Estilo Banner Dourado Safra) */
 .btn-resultado {
     width: auto;
-    min-width: 180px;
-    padding: 14px 45px 14px 25px;
-
+    min-width: 130px;
+    max-width: 55%;
+    padding: 12px 28px 12px 20px;
     border: 2px solid var(--gold);
-
-    background: linear-gradient(
-        100deg,
-        #1c2e21,
-        #0b160e
-    );
-
+    background: linear-gradient(100deg, #1c2e21, #0b160e);
     color: var(--gold-light);
-
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: bold;
-
     cursor: pointer;
     position: relative;
-
-    clip-path: polygon(
-        0 0,
-        88% 0,
-        100% 50%,
-        88% 100%,
-        0 100%,
-        8% 50%
-    );
-
+    white-space: nowrap;
+    clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%, 8% 50%);
     transition: all 0.2s ease;
 }
 
@@ -930,23 +923,188 @@ input[type="radio"]#generoTrans:checked + .btn-genero-trans {
 }
 
 /* =========================================================
-   RESPONSIVIDADE GERAL
+   RODAPÉ GLOBAL CENTRALIZADO (AGROSIDE)
+   ========================================================= */
+
+.footer {
+    width: 100%;
+    max-width: 820px;
+    margin: 48px auto 0 auto;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    background: rgba(17, 26, 20, 0.65);
+    border: 1px solid var(--panel-line);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(34, 197, 94, 0.08);
+}
+
+.footer-badge {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--agro-light);
+    background: var(--panel-dark);
+    border: 1.5px solid var(--agro-green);
+    padding: 4px 16px;
+    border-radius: 999px;
+    display: inline-block;
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.2);
+}
+
+.footer-course {
+    font-size: 13px;
+    color: var(--ink-dim);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.footer-divider {
+    width: 70px;
+    height: 2px;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        var(--agro-green), 
+        transparent
+    );
+    margin: 4px auto;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+.footer-authors {
+    font-size: 12px;
+    color: var(--agro-green);
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+}
+
+.footer-authors span {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 2px;
+    color: var(--ink-muted);
+    opacity: 0.85;
+}
+
+.footer-authors strong {
+    color: var(--agro-light);
+    font-weight: 600;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.footer-authors strong:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+}
+
+/* =========================================================
+   RESPONSIVIDADE E EMPILHAMENTO VERTICAL (MOBILE & TABLET)
    ========================================================= */
 
 @media (max-width: 768px) {
     .resultado-grid {
         grid-template-columns: 1fr !important;
     }
+
+    .resultado-coluna-esquerda,
+    .resultado-coluna-direita {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* 1. Transforma o container das opções de gênero em pilha vertical */
+    #perguntaDados .row:has(.btn-genero-masculino),
+    #pessoais .row:has(.btn-genero-masculino),
+    .row:has(.btn-genero-masculino) {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* 2. Cada card passa a ocupar 100% da largura útil */
+    #perguntaDados .row:has(.btn-genero-masculino) > [class*="col-"],
+    #pessoais .row:has(.btn-genero-masculino) > [class*="col-"],
+    .row:has(.btn-genero-masculino) > [class*="col-"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    /* 3. Formato idêntico ao modelo com ícone no centro e texto abaixo */
+    .btn-genero-masculino,
+    .btn-genero-feminino,
+    .btn-genero-trans {
+        width: 100% !important;
+        min-height: 95px !important;
+        border-radius: 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 14px 12px !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        white-space: nowrap !important;
+    }
+
+    .icone-genero {
+        width: 38px !important;
+        height: 38px !important;
+        margin-bottom: 6px !important;
+        display: block !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 20px 14px;
+        margin: 32px auto 0 auto;
+    }
+
+    .footer-authors {
+        font-size: 11.5px;
+    }
 }
 
 @media (max-width: 576px) {
     main.container {
-        padding-left: 13px !important;
-        padding-right: 13px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 1.85rem;
+    }
+
+    .card-body {
+        padding: 20px 14px;
+    }
+
+    .btn-resultado {
+        min-width: 110px;
+        padding: 10px 20px 10px 14px;
+        font-size: 0.85rem;
+    }
+
+    .quiz-arrow {
+        width: 58px;
+        height: 42px;
+        font-size: 19px;
     }
 }
 

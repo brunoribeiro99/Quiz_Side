@@ -1,10 +1,10 @@
 /* =========================================================
-   PIXELU — CONTROLE DO QUIZ
+   AGROSIDE — CONTROLE DO QUIZ
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const totalPerguntas = 10;
+    const totalPerguntas = 10; // ajuste se o AgroSide tiver outro número de perguntas
 
     let etapaAtual = 0;
 
@@ -15,6 +15,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const dadosPessoais =
         document.getElementById("perguntaDados");
+
+    const footer =
+        document.querySelector(".footer");
+
+
+    /* =====================================================
+       RODAPÉ: SÓ APARECE NA TELA DE DADOS (ETAPA 0)
+       ===================================================== */
+
+    function atualizarFooter(etapa) {
+        if (footer) {
+            footer.style.display = (etapa === 0) ? "" : "none";
+        }
+    }
 
 
     /* =====================================================
@@ -29,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 (etapa === 0) ? "block" : "none";
         }
 
-        /* Esconde ou mostra as perguntas de 1 a 10 */
+        /* Esconde ou mostra as perguntas */
         for (let i = 1; i <= totalPerguntas; i++) {
 
             const pergunta =
@@ -43,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         etapaAtual = etapa;
 
+        atualizarFooter(etapa);
         atualizarBotoes();
 
         /* Rola a página suavemente para o topo */
@@ -120,28 +135,19 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        /* =================================================
-           VERIFICA NOME
-           ================================================= */
-
+        /* VERIFICA NOME */
         const nomeValido =
             nome &&
             nome.value.trim().length > 8;
 
 
-        /* =================================================
-           VERIFICA NICKNAME
-           ================================================= */
-
+        /* VERIFICA NICKNAME */
         const nicknameValido =
             !nickname ||
             nickname.value.trim().length > 0;
 
 
-        /* =================================================
-           VERIFICA CELULAR
-           ================================================= */
-
+        /* VERIFICA CELULAR */
         const celularNumeros =
             celular
                 ? celular.value.replace(/\D/g, "")
@@ -152,10 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
             celularNumeros.length >= 10;
 
 
-        /* =================================================
-           VERIFICA E-MAIL
-           ================================================= */
-
+        /* VERIFICA E-MAIL */
         const emailValido =
             email &&
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
@@ -163,44 +166,29 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        /* =================================================
-           VERIFICA IDADE
-           ================================================= */
-
+        /* VERIFICA IDADE */
         const idadeValida =
             idade &&
             idade.value.trim() !== "";
 
 
-        /* =================================================
-           VERIFICA GÊNERO REAL (DROPDOWN)
-           ================================================= */
-
+        /* VERIFICA GÊNERO REAL (DROPDOWN) */
         const generoRealValido =
             generoReal &&
             generoReal.value !== "";
 
 
-        /* =================================================
-           VERIFICA GÊNERO DO AVATAR (BOTÕES)
-           ================================================= */
-
+        /* VERIFICA GÊNERO DO AVATAR (BOTÕES) */
         const generoAvatarValido =
             !!generoAvatar;
 
 
-        /* =================================================
-           VERIFICA TOM DE PELE
-           ================================================= */
-
+        /* VERIFICA TOM DE PELE */
         const tomPeleValido =
             !!tomPele;
 
 
-        /* =================================================
-           RETORNA SE TUDO ESTÁ CORRETO
-           ================================================= */
-
+        /* RETORNA SE TUDO ESTÁ CORRETO */
         return (
             nomeValido &&
             nicknameValido &&
@@ -223,17 +211,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const pergunta =
             document.getElementById(`pergunta${numero}`);
 
-
         if (!pergunta) {
             return false;
         }
-
 
         const respostas =
             pergunta.querySelectorAll(
                 'input[type="radio"], input[type="checkbox"]'
             );
-
 
         return Array.from(respostas).some(
             resposta => resposta.checked
@@ -269,19 +254,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     "btnProximaDados"
                 );
 
-
             if (proxima) {
-
                 proxima.disabled =
                     !dadosPreenchidos();
             }
-
 
             return;
         }
 
 
-        /* Perguntas 1 a 9 */
+        /* Perguntas antes da última */
         if (etapaAtual < totalPerguntas) {
 
             const proxima =
@@ -289,16 +271,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     `btnProxima${etapaAtual}`
                 );
 
-
             if (proxima) {
-
                 proxima.disabled =
                     !perguntaRespondida(etapaAtual);
             }
         }
 
 
-        /* Pergunta 10 */
+        /* Última pergunta */
         else if (etapaAtual === totalPerguntas) {
 
             const btnVerPontuacao =
@@ -306,12 +286,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     "btnVerPontuacao"
                 );
 
-
             if (btnVerPontuacao) {
 
                 btnVerPontuacao.disabled =
                     !perguntaRespondida(totalPerguntas);
-
 
                 btnVerPontuacao.style.opacity =
                     perguntaRespondida(totalPerguntas)
@@ -332,14 +310,10 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         if (etapaAtual === totalPerguntas) {
-
             finalizarQuiz();
-
             return;
         }
-
 
         mostrarEtapa(etapaAtual + 1);
     }
@@ -355,7 +329,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         mostrarEtapa(etapaAtual - 1);
     }
 
@@ -365,10 +338,11 @@ document.addEventListener("DOMContentLoaded", function () {
        ===================================================== */
 
     function finalizarQuiz() {
-        // 1. Descobre a área vencedora (calculada no script.js)
-        const vencedor = (typeof descobrirVencedor === "function") 
-            ? descobrirVencedor() 
-            : "programacao";
+        // 1. Descobre a classe vencedora (calculada no script.js)
+        //    Se descobrirVencedor não existir, usa a primeira classe de "resultado"
+        const vencedor = (typeof descobrirVencedor === "function")
+            ? descobrirVencedor()
+            : ((typeof resultado !== "undefined") ? Object.keys(resultado)[0] : "");
 
         // 2. Cria e exibe o avatar (função do avatar.js)
         let avatar = null;
@@ -396,13 +370,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        // 4. Esconde o quiz e mostra a seção de resultado
+        // 4. Esconde o quiz, o rodapé e mostra a seção de resultado
         const secaoQuiz = document.getElementById("quiz");
         const secaoDados = document.getElementById("perguntaDados");
         const secaoResultado = document.getElementById("resultado");
 
         if (secaoQuiz) secaoQuiz.style.display = "none";
         if (secaoDados) secaoDados.style.display = "none";
+        atualizarFooter(-1);
 
         if (secaoResultado) {
             secaoResultado.removeAttribute("hidden");
@@ -747,6 +722,15 @@ document.addEventListener("DOMContentLoaded", function () {
        INICIALIZAÇÃO DO APP
        ===================================================== */
 
-    mostrarEtapa(0);
+    /* Se abriu pelo QR Code (link com ?vencedor=...), o script.js já
+       mostrou o resultado: só garante que o rodapé fique escondido. */
+    const abriuPeloQr =
+        new URLSearchParams(window.location.search).has("vencedor");
+
+    if (abriuPeloQr) {
+        atualizarFooter(-1);
+    } else {
+        mostrarEtapa(0);
+    }
 
 });
