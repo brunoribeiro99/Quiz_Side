@@ -1,3 +1,7 @@
+// ========================================
+// 💻 PERFIS E CLASSES DEVSIDE
+// ========================================
+
 const classes = {
     programacao: {
         nome: "Programação",
@@ -23,378 +27,82 @@ const classes = {
 // ========================================
 
 const pontuacao = {
-
-    // ========================================
     // QUESTÃO 01
-    // ========================================
-
     q1: {
-        // Extrovertido(a)
-        q1a: {
-            programacao: 1,
-            design: 4,
-            redes: 3,
-            seguranca: 2,
-        },
-
-        // Introvertido(a)
-        q1b: {
-            programacao: 5,
-            design: 4,
-            redes: 2,
-            seguranca: 3,
-        }
+        q1a: { programacao: 1, design: 4, redes: 3, seguranca: 2 },
+        q1b: { programacao: 5, design: 4, redes: 2, seguranca: 3 }
     },
 
-
-    // ========================================
     // QUESTÃO 02
-    // ========================================
-
     q2: {
-        // A aparência e as cores
-        q2a: {
-            programacao: 2,
-            design: 5,
-            redes: 3,
-            seguranca: 1,
-        },
-
-        // As funções e ferramentas
-        q2b: {
-            programacao: 5,
-            design: 3,
-            redes: 4,
-            seguranca: 5,
-        },
-
-        // A velocidade e o desempenho da página
-        q2c: {
-            programacao: 4,
-            design: 2,
-            redes: 5,
-            seguranca: 3,
-        },
-
-        // A segurança e privacidade da página
-        q2d: {
-            programacao: 3,
-            design: 2,
-            redes: 4,
-            seguranca: 4,
-        }
+        q2a: { programacao: 2, design: 5, redes: 3, seguranca: 1 },
+        q2b: { programacao: 5, design: 3, redes: 4, seguranca: 5 },
+        q2c: { programacao: 4, design: 2, redes: 5, seguranca: 3 },
+        q2d: { programacao: 3, design: 2, redes: 4, seguranca: 4 }
     },
 
-
-    // ========================================
     // QUESTÃO 03
-    // ========================================
-
     q3: {
-        // Criar um programa ou jogo
-        q3a: {
-            programacao: 5,
-            design: 3,
-            redes: 2,
-            seguranca: 2,
-        },
-
-        // Criar uma interface bonita
-        q3b: {
-            programacao: 3,
-            design: 5,
-            redes: 1,
-            seguranca: 1,
-        },
-
-        // Fazer computadores se conectarem
-        q3c: {
-            programacao: 2,
-            design: 1,
-            redes: 5,
-            seguranca: 3,
-        },
-
-        // Descobrir e impedir uma invasão
-        q3d: {
-            programacao: 2,
-            design: 1,
-            redes: 4,
-            seguranca: 5,
-        },
-
-        // Resolver um problema de computador
-        q3e: {
-            programacao: 2,
-            design: 1,
-            redes: 4,
-            seguranca: 3,
-        }
+        q3a: { programacao: 5, design: 3, redes: 2, seguranca: 2 },
+        q3b: { programacao: 3, design: 5, redes: 1, seguranca: 1 },
+        q3c: { programacao: 2, design: 1, redes: 5, seguranca: 3 },
+        q3d: { programacao: 2, design: 1, redes: 4, seguranca: 5 },
+        q3e: { programacao: 2, design: 1, redes: 4, seguranca: 3 }
     },
 
-
-    // ========================================
     // QUESTÃO 04
-    // ========================================
-
     q4: {
-        // Quero entender como ele funciona
-        q4a: {
-            programacao: 5,
-            design: 1,
-            redes: 3,
-            seguranca: 2,
-        },
-
-        // Acho que a interface poderia ser melhor
-        q4b: {
-            programacao: 3,
-            design: 5,
-            redes: 2,
-            seguranca: 1,
-        },
-
-        // Procuro uma forma de resolver o problema
-        q4c: {
-            programacao: 5,
-            design: 1,
-            redes: 2,
-            seguranca: 2,
-        }
+        q4a: { programacao: 5, design: 1, redes: 3, seguranca: 2 },
+        q4b: { programacao: 3, design: 5, redes: 2, seguranca: 1 },
+        q4c: { programacao: 5, design: 1, redes: 2, seguranca: 2 }
     },
 
-
-    // ========================================
     // QUESTÃO 05
-    // ========================================
-
     q5: {
-        // Sim, acho isso muito interessante
-        q5a: {
-            programacao: 2,
-            design: 1,
-            redes: 5,
-            seguranca: 4,
-        },
-
-        // Nunca parei para pensar nisso
-        q5b: {
-            programacao: 3,
-            design: 5,
-            redes: 1,
-            seguranca: 2,
-        }
+        q5a: { programacao: 2, design: 1, redes: 5, seguranca: 4 },
+        q5b: { programacao: 3, design: 5, redes: 1, seguranca: 2 }
     },
 
-
-    // ========================================
     // QUESTÃO 06
-    // ========================================
-
     q6: {
-        // Gosto de criar coisas novas
-        q6a: {
-            programacao: 5,
-            design: 5,
-            redes: 2,
-            seguranca: 2,
-        },
-
-        // Gosto de resolver problemas
-        q6b: {
-            programacao: 5,
-            design: 3,
-            redes: 1,
-            seguranca: 1,
-        },
-
-        // Gosto de ajudar outras pessoas
-        q6c: {
-            programacao: 3,
-            design: 2,
-            redes: 3,
-            seguranca: 4,
-        },
-
-        // Gosto de descobrir como as coisas funcionam
-        q6d: {
-            programacao: 5,
-            design: 3,
-            redes: 4,
-            seguranca: 3,
-        }
+        q6a: { programacao: 5, design: 5, redes: 2, seguranca: 2 },
+        q6b: { programacao: 5, design: 3, redes: 1, seguranca: 1 },
+        q6c: { programacao: 3, design: 2, redes: 3, seguranca: 4 },
+        q6d: { programacao: 5, design: 3, redes: 4, seguranca: 3 }
     },
 
-
-    // ========================================
     // QUESTÃO 07
-    // ========================================
-
     q7: {
-        // Aprender a programar
-        q7a: {
-            programacao: 5,
-            design: 4,
-            redes: 3,
-            seguranca: 2,
-        },
-
-        // Criar designs e interfaces
-        q7b: {
-            programacao: 3,
-            design: 5,
-            redes: 1,
-            seguranca: 1,
-        },
-
-        // Montar e configurar redes
-        q7c: {
-            programacao: 3,
-            design: 1,
-            redes: 5,
-            seguranca: 4,
-        },
-
-        // Aprender sobre segurança digital
-        q7d: {
-            programacao: 1,
-            design: 1,
-            redes: 4,
-            seguranca: 5,
-        },
-
-        // Aprender a configurar e solucionar problemas
-        q7e: {
-            programacao: 4,
-            design: 2,
-            redes: 4,
-            seguranca: 3,
-        }
+        q7a: { programacao: 5, design: 4, redes: 3, seguranca: 2 },
+        q7b: { programacao: 3, design: 5, redes: 1, seguranca: 1 },
+        q7c: { programacao: 3, design: 1, redes: 5, seguranca: 4 },
+        q7d: { programacao: 1, design: 1, redes: 4, seguranca: 5 },
+        q7e: { programacao: 4, design: 2, redes: 4, seguranca: 3 }
     },
 
-
-    // ========================================
     // QUESTÃO 08
-    // ========================================
-
     q8: {
-        // Sozinho(a), concentrado no meu trabalho
-        q8a: {
-            programacao: 5,
-            design: 1,
-            redes: 1,
-            seguranca: 4,
-        },
-
-        // Em equipe, trocando ideias
-        q8b: {
-            programacao: 2,
-            design: 4,
-            redes: 5,
-            seguranca: 3,
-        },
-
-        // Ajudando e conversando com pessoas
-        q8c: {
-            programacao: 2,
-            design: 4,
-            redes: 4,
-            seguranca: 4,
-        }
+        q8a: { programacao: 5, design: 1, redes: 1, seguranca: 4 },
+        q8b: { programacao: 2, design: 4, redes: 5, seguranca: 3 },
+        q8c: { programacao: 2, design: 4, redes: 4, seguranca: 4 }
     },
 
-
-    // ========================================
     // QUESTÃO 09
-    // ========================================
-
     q9: {
-        // Programação
-        q9a: {
-            programacao: 5,
-            design: 4,
-            redes: 1,
-            seguranca: 1,
-        },
-
-        // Design e criação
-        q9b: {
-            programacao: 4,
-            design: 5,
-            redes: 1,
-            seguranca: 1,
-        },
-
-        // Redes e Internet
-        q9c: {
-            programacao: 2,
-            design: 2,
-            redes: 5,
-            seguranca: 4,
-        },
-
-        // Cibersegurança
-        q9d: {
-            programacao: 3,
-            design: 1,
-            redes: 4,
-            seguranca: 5,
-        },
+        q9a: { programacao: 5, design: 4, redes: 1, seguranca: 1 },
+        q9b: { programacao: 4, design: 5, redes: 1, seguranca: 1 },
+        q9c: { programacao: 2, design: 2, redes: 5, seguranca: 4 },
+        q9d: { programacao: 3, design: 1, redes: 4, seguranca: 5 }
     },
 
-
-    // ========================================
     // QUESTÃO 10
-    // ========================================
-
     q10: {
-        // Criar algo que posso usar
-        q10a: {
-            programacao: 5,
-            design: 5,
-            redes: 1,
-            seguranca: 1,
-        },
-
-        // Enfrentar um desafio
-        q10b: {
-            programacao: 4,
-            design: 4,
-            redes: 2,
-            seguranca: 2,
-        },
-
-        // Descobrir como algo funciona
-        q10c: {
-            programacao: 4,
-            design: 4,
-            redes: 1,
-            seguranca: 1,
-        },
-
-        // Poder ajudar alguém
-        q10d: {
-            programacao: 3,
-            design: 1,
-            redes: 4,
-            seguranca: 2,
-        },
-
-        // Melhorar algo que já existe
-        q10e: {
-            programacao: 5,
-            design: 4,
-            redes: 3,
-            seguranca: 2,
-        },
-
-        // Satisfazer minha curiosidade
-        q10f: {
-            programacao: 2,
-            design: 3,
-            redes: 5,
-            seguranca: 2,
-        }
+        q10a: { programacao: 5, design: 5, redes: 1, seguranca: 1 },
+        q10b: { programacao: 4, design: 4, redes: 2, seguranca: 2 },
+        q10c: { programacao: 4, design: 4, redes: 1, seguranca: 1 },
+        q10d: { programacao: 3, design: 1, redes: 4, seguranca: 2 },
+        q10e: { programacao: 5, design: 4, redes: 3, seguranca: 2 },
+        q10f: { programacao: 2, design: 3, redes: 5, seguranca: 2 }
     }
 };
 
@@ -409,6 +117,13 @@ const resultado = {
     redes: 0,
     seguranca: 0
 };
+
+
+// ========================================
+// 📱 CONTROLE DO MODO CELULAR
+// ========================================
+
+let modoCelular = false;
 
 
 // ========================================
@@ -630,6 +345,120 @@ function gerarDescricao(classe, xp, segundaClasse, xpSegunda) {
 
 
 // ========================================
+// 💾 BAIXAR IMAGEM GERADA (PC E CELULAR)
+// ========================================
+
+function baixarCanvas(canvas, nomeArquivo) {
+    canvas.toBlob(function (blob) {
+        if (!blob) return;
+
+        const urlBlob = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = nomeArquivo;
+        link.href = urlBlob;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(function () {
+            URL.revokeObjectURL(urlBlob);
+        }, 4000);
+    }, "image/png");
+}
+
+
+// ========================================
+// 🔗 MONTAR O LINK DO QR CODE
+// Leva pontuações e parâmetros do avatar decidido no PC
+// (o e-mail NÃO vai no link)
+// ========================================
+
+function montarLinkDoQr(vencedor) {
+    const urlBase = window.location.origin + window.location.pathname;
+
+    let link = `${urlBase}?vencedor=${encodeURIComponent(vencedor)}`
+        + `&prog=${resultado.programacao}`
+        + `&des=${resultado.design}`
+        + `&red=${resultado.redes}`
+        + `&seg=${resultado.seguranca}`;
+
+    try {
+        const generoSelecionado = (typeof obterGeneroSelecionado === "function") ? obterGeneroSelecionado() : null;
+        const peleSelecionada = (typeof obterTomPeleSelecionado === "function") ? obterTomPeleSelecionado() : null;
+        const avatar = (typeof escolherAvatar === "function") ? escolherAvatar(vencedor, generoSelecionado, peleSelecionada) : null;
+
+        const campoApelido = document.getElementById("nickname");
+        const apelido = ((campoApelido && campoApelido.value.trim()) || "").slice(0, 20);
+
+        if (avatar) {
+            link += `&g=${encodeURIComponent(avatar.genero.toLowerCase())}`
+                + `&p=${encodeURIComponent(avatar.tomPele)}`
+                + `&n=${avatar.numero}`
+                + `&a=${encodeURIComponent(apelido)}`;
+        }
+    } catch (erro) {
+        console.warn("⚠️ Não foi possível incluir o avatar no link do QR:", erro);
+    }
+
+    return link;
+}
+
+
+// ========================================
+// 🧍 MONTAR O AVATAR NO CELULAR A PARTIR DO LINK
+// ========================================
+
+function montarAvatarDoLink(area, genero, tomPele, numero) {
+    if (typeof avatarConfig === "undefined") return null;
+
+    const configArea = avatarConfig.areas[area];
+    const pastaPele = (typeof obterPastaPele === "function") ? obterPastaPele(tomPele) : null;
+
+    if (!configArea || !pastaPele || !genero) return null;
+
+    const limite = configArea[genero.toLowerCase()] || 20;
+    if (!numero || numero < 1 || numero > limite) return null;
+
+    return {
+        area: area,
+        genero: genero,
+        tomPele: tomPele,
+        pastaPele: pastaPele,
+        numero: numero,
+        imagem: `${avatarConfig.caminhoBase}${configArea.nome}/${genero}/sprites/${pastaPele}/${configArea.nome} (${numero}).png`
+    };
+}
+
+
+// ========================================
+// 📱 AJUSTAR A TELA PARA O CELULAR
+// ========================================
+
+function aplicarModoCelular() {
+    modoCelular = true;
+
+    const btnRefazer = document.getElementById("btnVoltarInicio");
+    const blocoQr = document.getElementById("blocoQrCodeDinamico");
+    const classePrincipal = document.querySelector(".classe-principal");
+    const containerBotoesPc = document.getElementById("containerBotoesAcao");
+    const btnFichaOriginal = document.getElementById("btnBaixarFichaResumo");
+    const colunaDireita = document.querySelector(".resultado-coluna-direita");
+
+    if (btnRefazer) btnRefazer.style.display = "none";
+    if (blocoQr) blocoQr.style.display = "none";
+    if (classePrincipal) classePrincipal.style.display = "none";
+
+    // Posiciona o botão Ficha Completa logo abaixo da tabela RPG
+    if (containerBotoesPc && btnFichaOriginal && colunaDireita) {
+        containerBotoesPc.style.maxWidth = "100%";
+        btnFichaOriginal.style.width = "100%";
+        btnFichaOriginal.style.marginTop = "14px";
+        colunaDireita.appendChild(btnFichaOriginal);
+    }
+}
+
+
+// ========================================
 // 🎮 MONTAGEM VISUAL DO RESULTADO
 // ========================================
 
@@ -688,7 +517,6 @@ function mostrarResultado() {
         `;
     }).join("");
 
-    // Injeta a estrutura encapsulada em duas colunas (resultado-grid)
     areaResultado.innerHTML = `
         <div class="resultado-grid" id="fichaCompletaRPG">
 
@@ -718,8 +546,8 @@ function mostrarResultado() {
                     </div>
                 </div>
 
-                <!-- BOTÕES DE DOWNLOAD LADO A LADO (_ _) -->
-                <div style="display: flex; gap: 8px; width: 100%; max-width: 250px; margin-top: 14px;">
+                <!-- CONTAINER DE BOTÕES -->
+                <div id="containerBotoesAcao" style="display: flex; gap: 8px; width: 100%; max-width: 250px; margin-top: 14px;">
                     <button
                         type="button"
                         class="btn-baixar-avatar"
@@ -739,7 +567,7 @@ function mostrarResultado() {
                     </button>
                 </div>
 
-                <!-- BOTÃO REFAZER / VOLTAR AO MENU PRINCIPAL -->
+                <!-- BOTÃO REFAZER -->
                 <button
                     type="button"
                     id="btnVoltarInicio"
@@ -751,12 +579,15 @@ function mostrarResultado() {
                     🔄 Refazer Quiz
                 </button>
 
-                <!-- CONTAINER DO QR CODE DINÂMICO (INICIA OCULTO) -->
-                <div id="blocoQrCodeDinamico" style="display: none; margin-top: 14px; flex-direction: column; align-items: center; gap: 6px;">
-                    <span id="qrLegenda" style="font-size: 0.72rem; color: #ffcc00; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
+                <!-- CONTAINER DO QR CODE DINÂMICO (PC) -->
+                <div id="blocoQrCodeDinamico" style="display: none; margin-top: 14px; width: 100%; max-width: 250px; box-sizing: border-box; flex-direction: column; align-items: center; gap: 10px; padding: 14px 12px; background: #0b0f19; border: 1.5px solid #ffcc00; border-radius: 12px; box-shadow: 0 0 12px rgba(255, 204, 0, 0.25);">
+                    <span id="qrLegenda" style="font-size: 0.72rem; color: #ffcc00; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; text-align: center;">
                         📱 ESCANEIE PARA BAIXAR
                     </span>
-                    <div id="qrcode" style="background: #ffffff; padding: 6px; border: 2px solid #ffcc00; box-shadow: 0 0 10px rgba(255, 204, 0, 0.35); border-radius: 8px; line-height: 0; display: inline-block;"></div>
+                    <div id="qrcode" style="background: #ffffff; padding: 8px; border: 2px solid #ffcc00; box-shadow: 0 0 10px rgba(255, 204, 0, 0.35); border-radius: 8px; line-height: 0; display: inline-block;"></div>
+                    <span style="font-size: 0.66rem; color: #cccccc; text-align: center; line-height: 1.3;">
+                        Aponte a câmera do celular para escolher e salvar sua imagem
+                    </span>
                 </div>
             </div>
 
@@ -802,60 +633,49 @@ function mostrarResultado() {
     `;
 
     // =========================================================
-    // 🚀 LÓGICA DE GERAÇÃO DO QR CODE COMPATÍVEL COM NETLIFY
+    // 🚀 GERADOR DO QR CODE NO PC
     // =========================================================
-    function atualizarQrCode(tipo) {
+    function exibirQrCodePC() {
+        if (modoCelular) return;
+
         const bloco = document.getElementById("blocoQrCodeDinamico");
         const containerQr = document.getElementById("qrcode");
-        const legenda = document.getElementById("qrLegenda");
 
         if (!bloco || !containerQr || typeof QRCode === "undefined") return;
 
-        // Monta a URL pública limpa na Netlify com as variáveis necessárias
-        const urlBase = window.location.origin + window.location.pathname;
-        const linkNetlify = `${urlBase}?vencedor=${encodeURIComponent(vencedor)}&prog=${resultado.programacao}&des=${resultado.design}&red=${resultado.redes}&seg=${resultado.seguranca}&tipo=${tipo}`;
+        const linkDestino = montarLinkDoQr(vencedor);
 
         containerQr.innerHTML = "";
         new QRCode(containerQr, {
-            text: linkNetlify,
-            width: 105,
-            height: 105,
+            text: linkDestino,
+            width: 160,
+            height: 160,
             colorDark: "#000000",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.M
         });
 
-        if (legenda) {
-            legenda.innerText = (tipo === "avatar") 
-                ? "📱 ESCANEIE: AVATAR NO CELULAR" 
-                : "📱 ESCANEIE: FICHA NO CELULAR";
-        }
-
         bloco.style.display = "flex";
+        bloco.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
-    // --- LÓGICA DE DOWNLOAD DOS BOTÕES ---
+    // --- AÇÕES DOS BOTÕES (PC vs CELULAR) ---
 
-    // 1. Download do Avatar com Selo + Ativação do QR Code
+    // 1. Avatar com Selo
     const btnAvatarSelo = document.getElementById("btnBaixarAvatarSelo");
     if (btnAvatarSelo) {
         btnAvatarSelo.addEventListener("click", function () {
+            if (!modoCelular) {
+                exibirQrCodePC();
+                return;
+            }
+
             const alvo = document.getElementById("areaAvatarComSelo");
             if (!alvo || typeof html2canvas === "undefined") return;
 
             btnAvatarSelo.innerText = "⏳ Gerando...";
             html2canvas(alvo, { backgroundColor: "#0b0f19", scale: 2 }).then(canvas => {
-                const imgData = canvas.toDataURL("image/png");
-
-                // Download direto no computador
-                const link = document.createElement("a");
-                link.download = `Avatar_SejaFatec_${vencedor}.png`;
-                link.href = imgData;
-                link.click();
-
-                // Gera QR Code apontando para a página na Netlify
-                atualizarQrCode("avatar");
-
+                baixarCanvas(canvas, `Avatar_Dev_${vencedor}.png`);
                 btnAvatarSelo.innerText = "⬇ Avatar + Selo";
             }).catch(() => {
                 btnAvatarSelo.innerText = "⬇ Avatar + Selo";
@@ -863,17 +683,21 @@ function mostrarResultado() {
         });
     }
 
-    // 2. Download da Ficha RPG Completa + Ativação do QR Code
+    // 2. Ficha Completa
     const btnFichaResumo = document.getElementById("btnBaixarFichaResumo");
     if (btnFichaResumo) {
         btnFichaResumo.addEventListener("click", function () {
+            if (!modoCelular) {
+                exibirQrCodePC();
+                return;
+            }
+
             const avatarSelo = document.getElementById("areaAvatarComSelo");
             const atributos = document.getElementById("blocoAtributosRPG");
             if (!avatarSelo || !atributos || typeof html2canvas === "undefined") return;
 
             btnFichaResumo.innerText = "⏳ Gerando...";
 
-            // Cria um container temporário para a ficha completa
             const cardExport = document.createElement("div");
             cardExport.style.cssText = `
                 position: fixed;
@@ -896,19 +720,8 @@ function mostrarResultado() {
             document.body.appendChild(cardExport);
 
             html2canvas(cardExport, { backgroundColor: "#0b0f19", scale: 2 }).then(canvas => {
-                const imgData = canvas.toDataURL("image/png");
-
-                // Download direto no computador
-                const link = document.createElement("a");
-                link.download = `Ficha_RPG_${vencedor}.png`;
-                link.href = imgData;
-                link.click();
-
+                baixarCanvas(canvas, `Ficha_Dev_${vencedor}.png`);
                 document.body.removeChild(cardExport);
-
-                // Gera QR Code apontando para a página na Netlify
-                atualizarQrCode("ficha");
-
                 btnFichaResumo.innerText = "📜 Ficha Completa";
             }).catch(() => {
                 if (document.body.contains(cardExport)) document.body.removeChild(cardExport);
@@ -916,16 +729,17 @@ function mostrarResultado() {
             });
         });
     }
-} // <--- FECHA A FUNÇÃO mostrarResultado()
+}
 
 
 // ========================================
-// 🏆 BOTÃO "VER MINHA PONTUAÇÃO" & LEITURA DE URL
+// 🏆 CONTROLE DE INICIALIZAÇÃO E URL
 // ========================================
 
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. VERIFICA SE A PÁGINA FOI ABERTA VIA QR CODE NO CELULAR COM PARÂMETROS
     const urlParams = new URLSearchParams(window.location.search);
+
+    // 1. CARREGAMENTO VIA QR CODE NO CELULAR
     if (urlParams.has("vencedor")) {
         const v = urlParams.get("vencedor");
         resultado.programacao = parseInt(urlParams.get("prog")) || 0;
@@ -946,10 +760,34 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         mostrarResultado();
-        return; // Pula o resto pois a tela já é de resultado
+
+        // Recupera apelido
+        const campoApelido = document.getElementById("nickname");
+        const apelidoDoLink = (urlParams.get("a") || "").slice(0, 20);
+        if (campoApelido) campoApelido.value = apelidoDoLink;
+
+        // Reconstrói o avatar idêntico ao do PC
+        const area = classes[v] ? v : descobrirVencedor();
+        const generoLink = (urlParams.get("g") || "").toLowerCase();
+        const peleLink = urlParams.get("p") || "";
+        const numeroLink = parseInt(urlParams.get("n"));
+
+        if (generoLink === "masculino" || generoLink === "feminino") {
+            const generoFormatado = generoLink.charAt(0).toUpperCase() + generoLink.slice(1);
+            const avatarCelular = montarAvatarDoLink(area, generoFormatado, peleLink, numeroLink);
+
+            if (avatarCelular && typeof mostrarAvatarNoResultado === "function") {
+                mostrarAvatarNoResultado(avatarCelular);
+            }
+        }
+
+        // Aplica o layout mobile limpo
+        aplicarModoCelular();
+
+        return;
     }
 
-    // 2. BOTÃO DO QUIZ NORMAL
+    // 2. FLUXO NORMAL DO QUIZ NO PC
     const btnVerPontuacao = document.getElementById("btnVerPontuacao");
     const quiz = document.getElementById("quiz");
     const resultadoArea = document.getElementById("resultado");
