@@ -40,7 +40,6 @@ const classes = {
 // ========================================
 
 const pontuacao = {
-
     // QUESTÃO 01: A=Tech, B=Prod, C=Eco, D=Lab
     q1: {
         q1a: { agrotech: 6, agroprod: 0, agroeco: 0, agrolab: 0 },
@@ -117,6 +116,13 @@ const resultado = {
     agroeco: 0,
     agrolab: 0
 };
+
+
+// ========================================
+// 📱 CONTROLE DO MODO CELULAR (ABERTO PELO QR CODE)
+// ========================================
+
+let modoCelular = false;
 
 
 // ========================================
@@ -262,6 +268,119 @@ function gerarDescricao(classe, segundaClasse) {
 
 
 // ========================================
+// 💾 BAIXAR IMAGEM GERADA (FUNCIONA NO PC E NO CELULAR)
+// ========================================
+
+function baixarCanvas(canvas, nomeArquivo) {
+    canvas.toBlob(function (blob) {
+        if (!blob) return;
+
+        const urlBlob = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = nomeArquivo;
+        link.href = urlBlob;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(function () {
+            URL.revokeObjectURL(urlBlob);
+        }, 4000);
+    }, "image/png");
+}
+
+
+// ========================================
+// 🔗 MONTAR O LINK DO QR CODE
+// Leva pontuação e dados do avatar montado no PC:
+// g = gênero, p = tom de pele, n = número, a = apelido
+// (o e-mail NÃO vai no link)
+// ========================================
+
+function montarLinkDoQr(vencedor) {
+    const urlBase = window.location.origin + window.location.pathname;
+
+    let link = `${urlBase}?vencedor=${encodeURIComponent(vencedor)}`
+        + `&tech=${resultado.agrotech}`
+        + `&prod=${resultado.agroprod}`
+        + `&eco=${resultado.agroeco}`
+        + `&lab=${resultado.agrolab}`;
+
+    try {
+        const generoSelecionado = obterGeneroSelecionado();
+        const peleSelecionada = obterTomPeleSelecionado();
+        const avatar = escolherAvatar(vencedor, generoSelecionado, peleSelecionada);
+
+        const campoApelido = document.getElementById("nickname");
+        const apelido = ((campoApelido && campoApelido.value.trim()) || "").slice(0, 20);
+
+        if (avatar) {
+            link += `&g=${encodeURIComponent(avatar.genero.toLowerCase())}`
+                + `&p=${encodeURIComponent(avatar.tomPele)}`
+                + `&n=${avatar.numero}`
+                + `&a=${encodeURIComponent(apelido)}`;
+        }
+    } catch (erro) {
+        console.warn("⚠️ Não foi possível incluir o avatar no link do QR:", erro);
+    }
+
+    return link;
+}
+
+
+// ========================================
+// 🧍 MONTAR O AVATAR NO CELULAR A PARTIR DO LINK
+// ========================================
+
+function montarAvatarDoLink(area, genero, tomPele, numero) {
+    const configArea = avatarConfig.areas[area];
+    const pastaPele = obterPastaPele(tomPele);
+
+    if (!configArea || !pastaPele || !genero) return null;
+
+    const limite = configArea[genero.toLowerCase()] || 20;
+    if (!numero || numero < 1 || numero > limite) return null;
+
+    return {
+        area: area,
+        genero: genero,
+        tomPele: tomPele,
+        pastaPele: pastaPele,
+        numero: numero,
+        imagem: `${avatarConfig.caminhoBase}${configArea.nome}/${genero}/sprites/${pastaPele}/${configArea.nome} (${numero}).png`
+    };
+}
+
+
+// ========================================
+// 📱 AJUSTAR A TELA PARA O CELULAR
+// ========================================
+
+function aplicarModoCelular() {
+    modoCelular = true;
+
+    const btnRefazer = document.getElementById("btnVoltarInicio");
+    const blocoQr = document.getElementById("blocoQrCodeDinamico");
+    const classePrincipal = document.querySelector(".classe-principal");
+    const containerBotoesPc = document.getElementById("containerBotoesAcao");
+    const btnFichaOriginal = document.getElementById("btnBaixarFichaResumo");
+    const colunaDireita = document.querySelector(".resultado-coluna-direita");
+
+    if (btnRefazer) btnRefazer.style.display = "none";
+    if (blocoQr) blocoQr.style.display = "none";
+    if (classePrincipal) classePrincipal.style.display = "none";
+
+    // Reorganiza layout: no celular o botão Ficha Completa fica abaixo da tabela RPG
+    if (containerBotoesPc && btnFichaOriginal && colunaDireita) {
+        containerBotoesPc.style.maxWidth = "100%";
+        btnFichaOriginal.style.width = "100%";
+        btnFichaOriginal.style.marginTop = "14px";
+        colunaDireita.appendChild(btnFichaOriginal);
+    }
+}
+
+
+// ========================================
 // 🎮 MONTAGEM VISUAL DO RESULTADO
 // ========================================
 
@@ -279,7 +398,6 @@ function mostrarResultado() {
 
     const classesRPG = ["agrotech", "agroprod", "agroeco", "agrolab"];
 
-    // Renderiza cada linha com o ícone correspondente e a barra de XP
     const linhasRPG = classesRPG.map(classe => {
         const xp = resultado[classe];
         const porcentagem = Math.min(Math.round((xp / 48) * 100), 100);
@@ -307,7 +425,6 @@ function mostrarResultado() {
         `;
     }).join("");
 
-    // Injeta a tela completa de resultado no padrão visual do AgroSide
     areaResultado.innerHTML = `
         <div class="resultado-grid" id="fichaCompletaRPG">
 
@@ -316,7 +433,6 @@ function mostrarResultado() {
                 <!-- ÁREA DE CAPTURA: AVATAR COM SELOS (TOPO E RODAPÉ) -->
                 <div id="areaAvatarComSelo" style="display: flex; flex-direction: column; align-items: center; background: #0b0f19; padding: 14px; border-radius: 12px; border: 1.5px solid rgba(255, 204, 0, 0.35); gap: 10px; width: 100%; box-sizing: border-box;">
                     
-                    <!-- SELO TOPO: ESTRELA AMARELA + ÍCONE AGRO + MEU TALENTO -->
                     <div style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 6px 14px; background: rgba(0, 0, 0, 0.75); border: 1.5px solid #ffcc00; border-radius: 20px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.3); width: fit-content;">
                         <span style="font-size: 0.95rem; line-height: 1;">⭐</span>
                         <img 
@@ -331,14 +447,13 @@ function mostrarResultado() {
 
                     <div class="avatar-card" id="avatarCard"></div>
                     
-                    <!-- SELO RODAPÉ: EVENTO AGRO -->
                     <div style="padding: 5px 14px; background: rgba(0, 0, 0, 0.65); border: 1.5px solid #ffcc00; border-radius: 20px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.25);">
                         <span style="font-size: 0.72rem; color: #ffcc00; font-weight: 700; letter-spacing: 0.8px;">✦ EU FUI NO SEJA FATEC • ENGENHARIA AGRONÔMICA ✦</span>
                     </div>
                 </div>
 
-                <!-- BOTÕES DE DOWNLOAD LADO A LADO (_ _) -->
-                <div style="display: flex; gap: 8px; width: 100%; max-width: 250px; margin-top: 14px;">
+                <!-- CONTAINER DE BOTÕES -->
+                <div id="containerBotoesAcao" style="display: flex; gap: 8px; width: 100%; max-width: 250px; margin-top: 14px;">
                     <button
                         type="button"
                         class="btn-baixar-avatar"
@@ -358,7 +473,7 @@ function mostrarResultado() {
                     </button>
                 </div>
 
-                <!-- BOTÃO REFAZER / VOLTAR AO MENU PRINCIPAL -->
+                <!-- BOTÃO REFAZER -->
                 <button
                     type="button"
                     id="btnVoltarInicio"
@@ -370,12 +485,15 @@ function mostrarResultado() {
                     🔄 Refazer Quiz
                 </button>
 
-                <!-- CONTAINER DO QR CODE DINÂMICO (INICIA OCULTO) -->
-                <div id="blocoQrCodeDinamico" style="display: none; margin-top: 14px; flex-direction: column; align-items: center; gap: 6px;">
-                    <span id="qrLegenda" style="font-size: 0.72rem; color: #ffcc00; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
+                <!-- CARD DO QR CODE (PC) -->
+                <div id="blocoQrCodeDinamico" style="display: none; margin-top: 14px; width: 100%; max-width: 250px; box-sizing: border-box; flex-direction: column; align-items: center; gap: 10px; padding: 14px 12px; background: #0b0f19; border: 1.5px solid #ffcc00; border-radius: 12px; box-shadow: 0 0 12px rgba(255, 204, 0, 0.25);">
+                    <span id="qrLegenda" style="font-size: 0.72rem; color: #ffcc00; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; text-align: center;">
                         📱 ESCANEIE PARA BAIXAR
                     </span>
-                    <div id="qrcode" style="background: #ffffff; padding: 6px; border: 2px solid #ffcc00; box-shadow: 0 0 10px rgba(255, 204, 0, 0.35); border-radius: 8px; line-height: 0; display: inline-block;"></div>
+                    <div id="qrcode" style="background: #ffffff; padding: 8px; border: 2px solid #ffcc00; box-shadow: 0 0 10px rgba(255, 204, 0, 0.35); border-radius: 8px; line-height: 0; display: inline-block;"></div>
+                    <span style="font-size: 0.66rem; color: #cccccc; text-align: center; line-height: 1.3;">
+                        Aponte a câmera do celular para escolher e salvar sua imagem
+                    </span>
                 </div>
             </div>
 
@@ -416,56 +534,51 @@ function mostrarResultado() {
     `;
 
     // =========================================================
-    // 🚀 LÓGICA DE GERAÇÃO DO QR CODE COMPATÍVEL COM NETLIFY
+    // 🚀 GERADOR DO QR CODE NO PC
     // =========================================================
-    function atualizarQrCode(tipo) {
+    function exibirQrCodePC() {
+        if (modoCelular) return;
+
         const bloco = document.getElementById("blocoQrCodeDinamico");
         const containerQr = document.getElementById("qrcode");
-        const legenda = document.getElementById("qrLegenda");
 
         if (!bloco || !containerQr || typeof QRCode === "undefined") return;
 
-        const urlBase = window.location.origin + window.location.pathname;
-        const linkNetlify = `${urlBase}?vencedor=${encodeURIComponent(vencedor)}&tech=${resultado.agrotech}&prod=${resultado.agroprod}&eco=${resultado.agroeco}&lab=${resultado.agrolab}&tipo=${tipo}`;
+        const linkDestino = montarLinkDoQr(vencedor);
 
         containerQr.innerHTML = "";
         new QRCode(containerQr, {
-            text: linkNetlify,
-            width: 105,
-            height: 105,
+            text: linkDestino,
+            width: 160,
+            height: 160,
             colorDark: "#000000",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.M
         });
 
-        if (legenda) {
-            legenda.innerText = (tipo === "avatar") 
-                ? "📱 ESCANEIE: AVATAR NO CELULAR" 
-                : "📱 ESCANEIE: FICHA NO CELULAR";
-        }
-
         bloco.style.display = "flex";
+        bloco.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
-    // --- LÓGICA DE DOWNLOAD DOS BOTÕES ---
+    // --- AÇÕES DOS BOTÕES (DIFERENCIADAS POR DISPOSITIVO) ---
 
-    // 1. Download do Avatar com Selo + Ativação do QR Code
+    // 1. Avatar com Selo
     const btnAvatarSelo = document.getElementById("btnBaixarAvatarSelo");
     if (btnAvatarSelo) {
         btnAvatarSelo.addEventListener("click", function () {
+            if (!modoCelular) {
+                // No PC: gera o QR Code
+                exibirQrCodePC();
+                return;
+            }
+
+            // No Celular: renderiza e baixa
             const alvo = document.getElementById("areaAvatarComSelo");
             if (!alvo || typeof html2canvas === "undefined") return;
 
             btnAvatarSelo.innerText = "⏳ Gerando...";
             html2canvas(alvo, { backgroundColor: "#0b0f19", scale: 2 }).then(canvas => {
-                const imgData = canvas.toDataURL("image/png");
-
-                const link = document.createElement("a");
-                link.download = `Avatar_Agro_${vencedor}.png`;
-                link.href = imgData;
-                link.click();
-
-                atualizarQrCode("avatar");
+                baixarCanvas(canvas, `Avatar_Agro_${vencedor}.png`);
                 btnAvatarSelo.innerText = "⬇ Avatar + Selo";
             }).catch(() => {
                 btnAvatarSelo.innerText = "⬇ Avatar + Selo";
@@ -473,10 +586,17 @@ function mostrarResultado() {
         });
     }
 
-    // 2. Download da Ficha RPG Completa + Ativação do QR Code
+    // 2. Ficha Completa
     const btnFichaResumo = document.getElementById("btnBaixarFichaResumo");
     if (btnFichaResumo) {
         btnFichaResumo.addEventListener("click", function () {
+            if (!modoCelular) {
+                // No PC: gera o mesmo QR Code
+                exibirQrCodePC();
+                return;
+            }
+
+            // No Celular: renderiza avatar + tabela e baixa
             const avatarSelo = document.getElementById("areaAvatarComSelo");
             const atributos = document.getElementById("blocoAtributosRPG");
             if (!avatarSelo || !atributos || typeof html2canvas === "undefined") return;
@@ -505,15 +625,8 @@ function mostrarResultado() {
             document.body.appendChild(cardExport);
 
             html2canvas(cardExport, { backgroundColor: "#0b0f19", scale: 2 }).then(canvas => {
-                const imgData = canvas.toDataURL("image/png");
-
-                const link = document.createElement("a");
-                link.download = `Ficha_Agro_${vencedor}.png`;
-                link.href = imgData;
-                link.click();
-
+                baixarCanvas(canvas, `Ficha_Agro_${vencedor}.png`);
                 document.body.removeChild(cardExport);
-                atualizarQrCode("ficha");
                 btnFichaResumo.innerText = "📜 Ficha Completa";
             }).catch(() => {
                 if (document.body.contains(cardExport)) document.body.removeChild(cardExport);
@@ -525,12 +638,13 @@ function mostrarResultado() {
 
 
 // ========================================
-// 🏆 BOTÃO "VER MINHA PONTUAÇÃO" & LEITURA DE URL
+// 🏆 CONTROLE DE INICIALIZAÇÃO E URL
 // ========================================
 
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. VERIFICA SE A PÁGINA FOI ABERTA VIA QR CODE NO CELULAR COM PARÂMETROS
     const urlParams = new URLSearchParams(window.location.search);
+
+    // 1. CARREGAMENTO VIA QR CODE NO CELULAR
     if (urlParams.has("vencedor")) {
         const v = urlParams.get("vencedor");
         resultado.agrotech = parseInt(urlParams.get("tech")) || 0;
@@ -552,15 +666,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
         mostrarResultado();
 
-        // Desenha o avatar correspondente no smartphone
-        if (typeof criarAvatar === "function") {
-            criarAvatar(v);
+        // Recupera o apelido
+        const campoApelido = document.getElementById("nickname");
+        const apelidoDoLink = (urlParams.get("a") || "").slice(0, 20);
+        if (campoApelido) campoApelido.value = apelidoDoLink;
+
+        // Reconstrói o avatar original
+        const area = classes[v] ? v : descobrirVencedor();
+        const generoLink = (urlParams.get("g") || "").toLowerCase();
+        const peleLink = urlParams.get("p") || "";
+        const numeroLink = parseInt(urlParams.get("n"));
+
+        if (generoLink === "masculino" || generoLink === "feminino") {
+            const generoFormatado = generoLink.charAt(0).toUpperCase() + generoLink.slice(1);
+            const avatarCelular = montarAvatarDoLink(area, generoFormatado, peleLink, numeroLink);
+
+            if (avatarCelular && typeof mostrarAvatarNoResultado === "function") {
+                mostrarAvatarNoResultado(avatarCelular);
+            }
         }
+
+        // Aplica o layout do celular com os dois botões disponíveis
+        aplicarModoCelular();
 
         return;
     }
 
-    // 2. BOTÃO DO QUIZ NORMAL
+    // 2. FLUXO NORMAL DO QUIZ NO PC
     const btnVerPontuacao = document.getElementById("btnVerPontuacao");
     const quiz = document.getElementById("quiz");
     const resultadoArea = document.getElementById("resultado");
